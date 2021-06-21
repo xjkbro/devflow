@@ -1,0 +1,29 @@
+{
+  "name": "devflowwebsite",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This example shows how to use [Tailwind CSS](https://tailwindcss.com/) (v2.1) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs)",
+  "main": "package.json",
+  "author": "Jason-Kyle De Lara <jason8oh8@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.11.2",
+    "@sanity/components": "^2.2.6",
+    "@sanity/core": "^2.11.0",
+    "@sanity/default-layout": "^2.11.2",
+    "@sanity/default-login": "^2.11.1",
+    "@sanity/desk-tool": "^2.11.2",
+    "@sanity/vision": "^2.11.2",
+    "prop-types": "^15.7",
+    "react": "^17.0",
+    "react-dom": "^17.0"
+  },
+  "devDependencies": {}
+}
