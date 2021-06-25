@@ -12,7 +12,12 @@
     "@sanity/components",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/desk-tool"
+    "@sanity/desk-tool",
+    "dark-mode",
+    "media",
+    "@sanity/vision",
+    "content-calendar",
+    "@sanity/code-input"
   ],
   "env": {
     "development": {
@@ -20,6 +25,10 @@
         "@sanity/vision"
       ]
     }
+  },
+  "paths": {
+    "source": "./src",
+    "compiled": "./lib"
   },
   "parts": [
     {
