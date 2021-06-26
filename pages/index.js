@@ -27,38 +27,40 @@ export default function Home() {
             .catch(console.error);
     }, []);
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <NavBar />
-            <Header />
+        <Container>
+            <div className="flex flex-col items-center justify-center min-h-screen py-2">
+                <NavBar />
+                <Header />
 
-            <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-                {postData &&
-                    postData.map((post, index) => {
-                        console.log(post);
-                        return (
-                            <Link
-                                href={`/post/${post.slug.current}`}
-                                key={index}
-                            >
-                                <div className="bg-green">
-                                    <h1>{post.title}</h1>
-                                    <h5>{post.author}</h5>
-                                    <BlockContent
-                                        block={post.body}
-                                        projectId="d6vys1oo"
-                                        dataset="production"
-                                    />
-                                </div>
-                            </Link>
-                        );
-                    })}
-            </main>
+                <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+                    {postData &&
+                        postData.map((post, index) => {
+                            console.log(post);
+                            return (
+                                <Link
+                                    href={`/post/${post.slug.current}`}
+                                    key={index}
+                                >
+                                    <div className="bg-green">
+                                        <h1>{post.title}</h1>
+                                        <h5>{post.author}</h5>
+                                        <BlockContent
+                                            block={post.body}
+                                            projectId="d6vys1oo"
+                                            dataset="production"
+                                        />
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                </main>
 
-            <div id="blog">askduhalksdjhlkajsd</div>
-        </div>
+                <div id="blog">askduhalksdjhlkajsd</div>
+            </div>
+        </Container>
     );
 }
 
 const Container = styled.div`
-    margin: 10px 200px;
+    margin: 0px 200px;
 `;
