@@ -1,10 +1,10 @@
 import NavBar from "../components/NavBar";
 
-export default function Projects() {
+export default function Aquatics() {
     return (
         <div>
             <NavBar />
-            Project Page
+            Aquatics Page
         </div>
     );
 }

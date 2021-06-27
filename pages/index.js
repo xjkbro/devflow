@@ -1,37 +1,36 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import Header from "../components/Header";
 import sanityClient from "../utils/client";
 import styled from "styled-components";
 import BlockContent from "@sanity/block-content-to-react";
+import Hero from "../components/Hero";
 
 export default function Home() {
-    const [postData, setPost] = useState(null);
-    useEffect(() => {
-        sanityClient
-            .fetch(
-                `*[_type == "post"]{
-            title,
-            slug,
-            mainImage{
-                asset->{
-                    _id,
-                    url
-                },
-                alt
-            }
-        }`
-            )
-            .then((data) => setPost(data))
-            .catch(console.error);
-    }, []);
+    // const [postData, setPost] = useState(null);
+    // useEffect(() => {
+    //     sanityClient
+    //         .fetch(
+    //             `*[_type == "post"]{
+    //         title,
+    //         slug,
+    //         mainImage{
+    //             asset->{
+    //                 _id,
+    //                 url
+    //             },
+    //             alt
+    //         }
+    //     }`
+    //         )
+    //         .then((data) => setPost(data))
+    //         .catch(console.error);
+    // }, []);
     return (
         <Container>
-            <div className="flex flex-col items-center justify-center min-h-screen py-2">
-                <NavBar />
-                <Header />
-
+            <NavBar />
+            <Hero />
+            {/* <div className="flex flex-col items-center justify-center min-h-screen py-2">
                 <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                     {postData &&
                         postData.map((post, index) => {
@@ -54,13 +53,12 @@ export default function Home() {
                             );
                         })}
                 </main>
-
-                <div id="blog">askduhalksdjhlkajsd</div>
-            </div>
+            </div> */}
+            <div id="blog">askduhalksdjhlkajsd</div>
         </Container>
     );
 }
 
 const Container = styled.div`
-    margin: 0px 200px;
+    /* margin: 0px 200px; */
 `;
