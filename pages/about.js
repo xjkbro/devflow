@@ -4,8 +4,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
 import BlockContent from "@sanity/block-content-to-react";
-
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -21,44 +21,50 @@ const serializers = {
     },
 };
 export default function About() {
-    const [myPost, setMyPost] = useState(null);
-    const slug = "welcome-our-ceo-jason";
+    const [team, setTeam] = useState([]);
     useEffect(() => {
         sanityClient
             .fetch(
                 `
-        *[slug.current == "${slug}"]{
-            title,
-            _id,
-            slug,
-            mainImage{
-                asset->{
+                *[_type == "author"]| order(_createdAt asc){
+                    name,
                     _id,
-                    url
+                    slug,
+                    image,
+                    bio,
                 }
-            },
-            body,
-            "name": author->name,
-
-        }
-        `
+                `
             )
-            .then((data) => setMyPost(data[0]))
+            .then((data) => {
+                console.log(data);
+                setTeam(data);
+            })
             .catch(console.error);
-    }, [slug]);
-    if (!myPost) return <div>LOADING ...</div>;
+    }, []);
+    if (!team) return <div>LOADING ...</div>;
     return (
-        <div>
+        <Container>
             <NavBar />
             ABOUT PAGE
-            <h1>{myPost.title}</h1>
-            <h5>{myPost.name}</h5>
-            <BlockContent
-                blocks={myPost.body}
-                serializers={serializers}
-                projectId="d6vys1oo"
-                dataset="production"
-            />
-        </div>
+            {team.map((item) => (
+                <ItemContainer key={item._id}>
+                    <h1>{item.name}</h1>
+                    <Image src={urlFor(item.image)} />
+                    <BlockContent
+                        blocks={item.bio}
+                        serializers={serializers}
+                        projectId="d6vys1oo"
+                        dataset="production"
+                    />
+                </ItemContainer>
+            ))}
+        </Container>
     );
 }
+
+const Container = styled.div``;
+const ItemContainer = styled.div``;
+const Image = styled.img`
+    height: 200px;
+    border-radius: 50%;
+`;

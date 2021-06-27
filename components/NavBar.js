@@ -30,16 +30,16 @@ export default function NavBar() {
                     <Link href="/contact">Contact</Link>
                 </Navigation>
                 <Social>
-                    <Link href="https://www.google.com">
+                    <Link href="https://www.twitter.com/devflow">
                         <TwitterIcon />
                     </Link>
-                    <Link href="https://www.google.com">
+                    <Link href="https://www.facebook.com/devflow">
                         <FacebookIcon />
                     </Link>
-                    <Link href="https://www.google.com">
+                    <Link href="https://instagram.com/thedevflow">
                         <InstagramIcon />
                     </Link>
-                    <Link href="https://www.google.com">
+                    <Link href="https://www.youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw">
                         <YouTubeIcon />
                     </Link>
                 </Social>
