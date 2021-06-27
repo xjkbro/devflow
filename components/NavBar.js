@@ -18,7 +18,7 @@ export default function NavBar() {
                 <Navigation>
                     <Link href="/">
                         <Image
-                            src="/images/DevFlow Logo - BG.png"
+                            src="/images/DevFlow Logo - White.png"
                             height={174}
                             width={348}
                         />
