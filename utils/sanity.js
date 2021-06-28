@@ -1,4 +1,6 @@
 import { createClient, createImageUrlBuilder } from "next-sanity";
+import getYouTubeId from "get-youtube-id";
+import YouTube from "react-youtube";
 
 const config = {
     /**
@@ -26,3 +28,23 @@ export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient(config);
+const opts = {
+    height: "480",
+    width: "640",
+};
+export const serializers = {
+    types: {
+        youtube: ({ node }) => {
+            const { url } = node;
+            const id = getYouTubeId(url);
+            return <YouTube videoId={id} opts={opts} />;
+        },
+        code: ({ node }) => {
+            return (
+                <pre>
+                    <code>{node.code}</code>
+                </pre>
+            );
+        },
+    },
+};

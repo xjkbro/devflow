@@ -29,7 +29,7 @@ export default function SinglePage() {
         sanityClient
             .fetch(
                 `
-        *[slug.current == "${slug}"]{
+        *[slug.current == "${slug}" && category->title == "Programming"]{
             title,
             _id,
             slug,

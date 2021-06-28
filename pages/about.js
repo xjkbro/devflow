@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
 import getYouTubeId from "get-youtube-id";
@@ -42,7 +43,7 @@ export default function About() {
             })
             .catch(console.error);
     }, []);
-    if (!team) return <div>LOADING ...</div>;
+    if (!team) return <Loading />;
     return (
         <Container>
             <NavBar />

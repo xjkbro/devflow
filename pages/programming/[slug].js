@@ -1,38 +1,27 @@
 import NavBar from "../../components/NavBar";
-import imageUrlBuilder from "@sanity/image-url";
-import sanityClient from "../../utils/client";
-import getYouTubeId from "get-youtube-id";
-import YouTube from "react-youtube";
+import Footer from "../../components/Footer";
+import Loading from "../../components/Loading";
 import BlockContent from "@sanity/block-content-to-react";
+import { urlFor, sanityClient, serializers } from "../../utils/sanity";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source) {
-    return builder.image(source);
-}
-const serializers = {
-    types: {
-        youtube: ({ node }) => {
-            const { url } = node;
-            const id = getYouTubeId(url);
-            return <YouTube videoId={id} />;
-        },
-    },
-};
+import Error from "../Error";
+import styled from "styled-components";
 
 export default function SinglePage() {
     const [singlePost, setSinglePost] = useState(null);
+    const [errorFound, setErrorFound] = useState(false);
     const router = useRouter();
     const { slug } = router.query;
     useEffect(() => {
         sanityClient
             .fetch(
                 `
-        *[slug.current == "${slug}"]{
+        *[slug.current == "${slug}" && category->title == "Programming"]{
             title,
             _id,
             slug,
+            category->{title,_id,description},
             mainImage{
                 asset->{
                     _id,
@@ -41,25 +30,69 @@ export default function SinglePage() {
             },
             body,
             "name": author->name,
-
         }
         `
             )
-            .then((data) => setSinglePost(data[0]))
+            .then((data) => {
+                console.log(data[0]);
+                setSinglePost(data[0]);
+            })
             .catch(console.error);
     }, [slug]);
-    if (!singlePost) return <div>LOADING ...</div>;
+
+    if (!singlePost) return <Error />;
+    // if (errorFound == true) return <Error />;
+    // else if (!singlePost && errorFound == false) return <Loading />;
     return (
         <div>
             <NavBar />
-            <h1>{singlePost.title}</h1>
-            <h5>{singlePost.name}</h5>
-            <BlockContent
-                blocks={singlePost.body}
-                serializers={serializers}
-                projectId="d6vys1oo"
-                dataset="production"
-            />
+            <Image src={urlFor(singlePost.mainImage)} />
+            <Title>{singlePost.title}</Title>
+            <Author>by: {singlePost.name}</Author>
+            <Body>
+                <BlockContent
+                    blocks={singlePost.body}
+                    serializers={serializers}
+                    projectId="d6vys1oo"
+                    dataset="production"
+                />
+            </Body>
+            <Line />
+            <Footer />
         </div>
     );
 }
+const Line = styled.div`
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+`;
+const Image = styled.img`
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+`;
+const Title = styled.div`
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+`;
+const Author = styled.div`
+    font-size: 1rem;
+    font-weight: 200;
+    text-transform: full-width;
+`;
+const Body = styled.div`
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+    div > div > iframe {
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+    div > pre {
+        margin: 5vh 20vw;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 5px;
+        box-shadow: 1px 1px 3px black;
+    }
+`;
