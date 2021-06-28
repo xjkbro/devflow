@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -61,6 +62,7 @@ export default function Programming() {
                     />
                 </ItemContainer>
             ))}
+            <Footer />
         </div>
     );
 }

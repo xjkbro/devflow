@@ -5,6 +5,7 @@ import sanityClient from "../utils/client";
 import styled from "styled-components";
 import BlockContent from "@sanity/block-content-to-react";
 import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 
 export default function Home() {
     // const [postData, setPost] = useState(null);
@@ -54,11 +55,16 @@ export default function Home() {
                         })}
                 </main>
             </div> */}
-            <div id="blog">askduhalksdjhlkajsd</div>
+            <Line />
+            <Footer />
         </Container>
     );
 }
 
 const Container = styled.div`
     /* margin: 0px 200px; */
+`;
+const Line = styled.div`
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 `;
