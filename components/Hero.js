@@ -10,26 +10,27 @@ export default function Hero() {
                 <Title>One life. No Regrets.</Title>
                 <SubTitle>Make the best of it.</SubTitle>
             </HeroContext>
-            <Sub>
+            {/* <Sub>
                 <input type="text" placeholder="EMAIL" />
                 <button>SUBSCRIBE</button>
-            </Sub>
+            </Sub> */}
         </Container>
     );
 }
 
 const Container = styled.div`
     overflow: hidden;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 `;
 const Image = styled.img`
-    width: 1500px;
-    height: 1216px;
+    /* width: 1500px;
+    height: 1216px; */
+    width: 100%;
+    height: 100%;
     mix-blend-mode: color-dodge;
-
-    /* top: 100px; */
-    /* position: absolute;
-    z-index: 1; */
+    @media (max-width: 700px) {
+    }
 `;
 const HeroContext = styled.div``;
 const Title = styled.h1`
@@ -41,6 +42,11 @@ const Title = styled.h1`
     text-transform: uppercase;
     text-shadow: 5px 5px 15px #000;
     letter-spacing: 10px;
+    @media (max-width: 700px) {
+        top: 200px;
+        left: 20px;
+        font-size: 1rem;
+    }
 `;
 const SubTitle = styled.h3`
     position: absolute;

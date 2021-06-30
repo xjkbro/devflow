@@ -10,6 +10,13 @@ import BlockContent from "@sanity/block-content-to-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
+import Box from "@material-ui/core/Box";
+import { Info, InfoTitle } from "@mui-treasury/components/info";
+
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
     return builder.image(source);
@@ -23,7 +30,24 @@ const serializers = {
         },
     },
 };
+const useStyles = makeStyles({
+    card: {
+        minWidth: 426,
+        minHeight: 240,
+        position: "relative",
+    },
+    content: {
+        position: "absolute",
+        zIndex: 2,
+        bottom: 0,
+        width: "100%",
+    },
+    titles: {
+        color: "white",
+    },
+});
 export default function Programming() {
+    const styles = useStyles();
     const [programming, setProgramming] = useState([]);
     useEffect(() => {
         sanityClient
@@ -54,19 +78,26 @@ export default function Programming() {
             <BigTitle>Programming</BigTitle>
             <Container>
                 {programming.map((item) => (
-                    <ItemContainer key={item.slug}>
+                    <ItemContainer>
                         <a href={`/programming/${item.slug.current}`}>
-                            <Text>
-                                <h1>{item.title}</h1>
-                                {/* <h4>{item.author.name}</h4> */}
-                            </Text>
-                            <Image src={urlFor(item.mainImage)} />
-                            {/* <BlockContent
-                            blocks={item.body}
-                            serializers={serializers}
-                            projectId="d6vys1oo"
-                            dataset="production"
-                        /> */}
+                            <Card className={styles.root}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={styles.card}
+                                        image={urlFor(item.mainImage)}
+                                        title={item.title}
+                                    />
+                                    <Box
+                                        py={3}
+                                        px={2}
+                                        className={styles.content}
+                                    >
+                                        <Info className={styles.titles}>
+                                            <InfoTitle>{item.title}</InfoTitle>
+                                        </Info>
+                                    </Box>
+                                </CardActionArea>
+                            </Card>
                         </a>
                     </ItemContainer>
                 ))}
@@ -90,26 +121,29 @@ const BigTitle = styled.div`
     text-transform: uppercase;
 `;
 const ItemContainer = styled.div`
-    width: 400px;
-    height: 100%;
+    /* width: 426px;
+    height: 240px;
+    overflow: hidden;
+    position: relative; 
     background-color: white;
     border-radius: 10px;
-    border: 1px solid white;
+    border: 1px solid white;*/
     margin: 10px;
     margin-bottom: 30px;
-    position: relative;
     transition: all 150ms ease-in;
     :hover {
         transform: scale(1.005);
         color: black;
         opacity: 1;
-        box-shadow: 0px 5px 15px #222;
+        box-shadow: 0px 5px 5px #222;
     }
 `;
 const Image = styled.img`
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 `;
 const Text = styled.div`
     color: white;

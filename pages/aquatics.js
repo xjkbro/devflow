@@ -10,6 +10,13 @@ import BlockContent from "@sanity/block-content-to-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
+import Box from "@material-ui/core/Box";
+import { Info, InfoTitle } from "@mui-treasury/components/info";
+
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
     return builder.image(source);
@@ -23,7 +30,24 @@ const serializers = {
         },
     },
 };
+const useStyles = makeStyles({
+    card: {
+        minWidth: 426,
+        minHeight: 240,
+        position: "relative",
+    },
+    content: {
+        position: "absolute",
+        zIndex: 2,
+        bottom: 0,
+        width: "100%",
+    },
+    titles: {
+        color: "white",
+    },
+});
 export default function Aquatics() {
+    const styles = useStyles();
     const [aquatics, setAquatics] = useState([]);
     useEffect(() => {
         sanityClient
@@ -54,19 +78,26 @@ export default function Aquatics() {
             <BigTitle>Aquatics</BigTitle>
             <Container>
                 {aquatics.map((item) => (
-                    <ItemContainer key={item.slug}>
-                        <a href={`/aquatics/${item.slug.current}`}>
-                            <Text>
-                                <h1>{item.title}</h1>
-                                {/* <h4>{item.author.name}</h4> */}
-                            </Text>
-                            <Image src={urlFor(item.mainImage)} />
-                            {/* <BlockContent
-                            blocks={item.body}
-                            serializers={serializers}
-                            projectId="d6vys1oo"
-                            dataset="production"
-                        /> */}
+                    <ItemContainer>
+                        <a href={`/programming/${item.slug.current}`}>
+                            <Card className={styles.root}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        className={styles.card}
+                                        image={urlFor(item.mainImage)}
+                                        title={item.title}
+                                    />
+                                    <Box
+                                        py={3}
+                                        px={2}
+                                        className={styles.content}
+                                    >
+                                        <Info className={styles.titles}>
+                                            <InfoTitle>{item.title}</InfoTitle>
+                                        </Info>
+                                    </Box>
+                                </CardActionArea>
+                            </Card>
                         </a>
                     </ItemContainer>
                 ))}
@@ -89,46 +120,14 @@ const BigTitle = styled.div`
     font-weight: 900;
     text-transform: uppercase;
 `;
+
 const ItemContainer = styled.div`
-    width: 400px;
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid white;
     margin: 10px;
     margin-bottom: 30px;
-    position: relative;
     transition: all 150ms ease-in;
     :hover {
-        transform: scale(1.005);
-        color: black;
+        /* transform: scale(1.005); */
         opacity: 1;
-        box-shadow: 0px 5px 15px #222;
-    }
-`;
-const Image = styled.img`
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-`;
-const Text = styled.div`
-    color: white;
-    position: absolute;
-    bottom: 0px;
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 150ms ease-in;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 1rem;
-    :hover {
-        background-color: rgba(0, 0, 0, 0.7);
-        opacity: 1;
+        box-shadow: 0px 5px 5px #111;
     }
 `;

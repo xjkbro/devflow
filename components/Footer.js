@@ -54,6 +54,9 @@ const FooterLinks = styled.nav`
         padding: 0 10px;
         margin: auto 0px;
     }
+    @media (max-width: 700px) {
+        font-size: 0.4em;
+    }
 `;
 const Social = styled.div`
     display: inline-flex;
@@ -66,10 +69,16 @@ const Social = styled.div`
     .MuiSvgIcon-root {
         width: 2em;
     }
+    @media (max-width: 1200px) {
+        display: none;
+    }
 `;
 const Copyright = styled.div`
     margin: auto;
     text-align: center;
     color: rgba(255, 255, 255, 0.3);
     padding-bottom: 20px;
+    @media (max-width: 700px) {
+        font-size: 0.4em;
+    }
 `;

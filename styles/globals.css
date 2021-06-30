@@ -4,3 +4,13 @@ body {
     background-color: #061922;
     overflow-x: hidden;
 }
+@media screen and (max-width: 1350px) {
+    body {
+        margin: 0px 10px;
+    }
+}
+@media screen and (max-width: 600px) {
+    body {
+        margin: 0px 5px;
+    }
+}
