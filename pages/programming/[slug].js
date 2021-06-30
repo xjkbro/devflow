@@ -5,7 +5,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import { urlFor, sanityClient, serializers } from "../../utils/sanity";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Error from "../Error";
+import Error from "../error";
 import styled from "styled-components";
 
 export default function SinglePage() {
