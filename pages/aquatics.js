@@ -80,7 +80,7 @@ export default function Aquatics() {
             <Container>
                 {aquatics.map((item) => (
                     <ItemContainer>
-                        <a href={`/programming/${item.slug.current}`}>
+                        <a href={`/aquatics/${item.slug.current}`}>
                             <Card className={styles.root}>
                                 <CardActionArea>
                                     <CardMedia
