@@ -16,7 +16,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 import { Info, InfoTitle } from "@mui-treasury/components/info";
-import styling from "../styles/Aquatics.module.css";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -77,10 +76,10 @@ export default function Aquatics() {
     return (
         <div>
             <NavBar />
-            <div className={styling.bigTitle}>Aquatics</div>
-            <div className={styling.container}>
+            <BigTitle>Aquatics</BigTitle>
+            <Container>
                 {aquatics.map((item) => (
-                    <div className={styling.itemContainer}>
+                    <ItemContainer>
                         <a href={`/aquatics/${item.slug.current}`}>
                             <Card className={styles.root}>
                                 <CardActionArea>
@@ -101,9 +100,9 @@ export default function Aquatics() {
                                 </CardActionArea>
                             </Card>
                         </a>
-                    </div>
+                    </ItemContainer>
                 ))}
-            </div>
+            </Container>
             <Footer />
         </div>
     );

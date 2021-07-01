@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.bigTitle {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.itemContainer {
+    margin: 10px;
+    margin-bottom: 30px;
+    transition: all 150ms ease-in;
+}
+.itemContainer :hover {
+    /* transform: scale(1.005); */
+    opacity: 1;
+    box-shadow: 0px 5px 5px #111;
+}
+.itemContainer > .MuiPaper-root {
+    background-color: black;
+}
