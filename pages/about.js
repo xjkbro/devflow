@@ -73,6 +73,15 @@ const ItemContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    @media (max-width: 800px) {
+        flex-direction: column;
+        flex-wrap: column;
+        padding: 30px 50px;
+        div > div > p {
+            word-wrap: break-word;
+            justify-content: left;
+        }
+    }
 `;
 const TextContainer = styled.div`
     display: flex;

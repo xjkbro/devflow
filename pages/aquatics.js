@@ -35,6 +35,7 @@ const useStyles = makeStyles({
         minWidth: 426,
         minHeight: 240,
         position: "relative",
+        transform: "scale(1.05)",
     },
     content: {
         position: "absolute",
@@ -129,5 +130,8 @@ const ItemContainer = styled.div`
         /* transform: scale(1.005); */
         opacity: 1;
         box-shadow: 0px 5px 5px #111;
+    }
+    .MuiPaper-root {
+        background-color: black;
     }
 `;
