@@ -6,7 +6,6 @@ import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
-import BlockContent from "@sanity/block-content-to-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -16,6 +15,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 import { Info, InfoTitle } from "@mui-treasury/components/info";
+import styling from "../styles/Category.module.css";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -76,10 +76,10 @@ export default function Programming() {
     return (
         <div>
             <NavBar />
-            <BigTitle>Programming</BigTitle>
-            <Container>
+            <div className={styling.bigTitle}>Programming</div>
+            <div className={styling.container}>
                 {programming.map((item) => (
-                    <ItemContainer>
+                    <div className={styling.itemContainer}>
                         <a href={`/programming/${item.slug.current}`}>
                             <Card className={styles.root}>
                                 <CardActionArea>
@@ -100,9 +100,9 @@ export default function Programming() {
                                 </CardActionArea>
                             </Card>
                         </a>
-                    </ItemContainer>
+                    </div>
                 ))}
-            </Container>
+            </div>
             <Footer />
         </div>
     );

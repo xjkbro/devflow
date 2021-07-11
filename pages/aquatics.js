@@ -6,7 +6,6 @@ import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
-import BlockContent from "@sanity/block-content-to-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -16,7 +15,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 import { Info, InfoTitle } from "@mui-treasury/components/info";
-import styling from "../styles/Aquatics.module.css";
+import styling from "../styles/Category.module.css";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
