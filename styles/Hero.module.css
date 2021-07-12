@@ -1,29 +1,52 @@
 .container {
-    overflow: hidden;
+    position: relative;
     width: 100%;
+    max-width: 1600px;
     height: 100%;
+    min-height: 1080px;
 }
-.heroImage {
-    /* width: 1500px;
-    height: 1216px; */
+.divImage {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: url("../public/hero.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
     mix-blend-mode: color-dodge;
 }
 .title {
     position: absolute;
-    top: 500px;
-    right: 450px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 26.5%;
+    text-align: center;
+    color: white;
     font-size: 4rem;
     font-weight: 900;
     text-transform: uppercase;
     text-shadow: 5px 5px 15px #000;
     letter-spacing: 10px;
 }
+/* .heroImage {
+    width: 1500px;
+    height: 1216px;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: color-dodge;
+} */
+
 .subtitle {
     position: absolute;
-    top: 600px;
-    right: 700px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 35.5%;
+    text-align: center;
+    color: white;
     font-size: 2rem;
     font-weight: 300;
     text-shadow: 5px 5px 15px #000;
@@ -32,8 +55,11 @@
 
 .subscribe {
     position: absolute;
-    bottom: 100px;
-    right: 600px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 50.5%;
+    text-align: center;
 }
 .subscribe > input {
     height: 50px;
@@ -46,10 +72,66 @@
     background-color: #061922;
     padding: 15px;
 }
+
+@media screen and (max-width: 1400px) {
+    .container {
+        min-height: 900px;
+    }
+    .title {
+        font-size: 2.7rem;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .container {
+        min-height: 800px;
+    }
+    .subtitle {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .container {
+        min-height: 700px;
+    }
+    .subscribe > input {
+        width: 400px;
+    }
+}
 @media screen and (max-width: 700px) {
-    .heroTitle {
-        top: 200px;
-        left: 20px;
-        font-size: 1rem;
+    .container {
+        min-height: 500px;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+    .subtitle {
+        font-size: 1.12rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .container {
+        min-height: 300px;
+    }
+    .title {
+        font-size: 1.2rem;
+        letter-spacing: 5px;
+        padding-top: 15.5%;
+    }
+    .subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        padding-top: 25.5%;
+    }
+    .subscribe {
+        padding-top: 45.5%;
+        font-size: 0.5rem;
+    }
+    .subscribe > input {
+        height: 30px;
+        width: 300px;
+    }
+    .subscribe > button {
+        padding: 10px;
     }
 }
