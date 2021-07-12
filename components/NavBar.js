@@ -24,6 +24,8 @@ import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 
+import styles from "../styles/NavBar.module.css";
+
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -46,7 +48,8 @@ export default function NavBar() {
         setMenu(open);
     };
     const list = () => (
-        <MenuDrawer
+        <div
+            className={styles.menuDrawer}
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
         >
@@ -102,7 +105,7 @@ export default function NavBar() {
                     </ListItem>
                 </Link>
             </List>
-        </MenuDrawer>
+        </div>
     );
     return (
         <header>
@@ -110,7 +113,7 @@ export default function NavBar() {
                 <title>DevFlow</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <MobileContainer>
+            <div className={styles.mobileContainer}>
                 <Image
                     src="/images/DevFlow Logo - White.png"
                     height={174}
@@ -122,9 +125,9 @@ export default function NavBar() {
                 <Drawer open={menu} onClose={toggleDrawer(false)}>
                     {list()}
                 </Drawer>
-            </MobileContainer>
-            <NavContainer>
-                <Navigation>
+            </div>
+            <div className={styles.container}>
+                <nav className={styles.navigation}>
                     <Link href="/">
                         <Image
                             src="/images/DevFlow Logo - White.png"
@@ -137,8 +140,8 @@ export default function NavBar() {
                     <Link href="/programming">Programming</Link>
                     <Link href="/aquatics">Aquatics</Link>
                     <Link href="/contact">Contact</Link>
-                </Navigation>
-                <Social>
+                </nav>
+                <div className={styles.social}>
                     <Link href="https://www.twitter.com/devflow">
                         <TwitterIcon />
                     </Link>
@@ -151,8 +154,8 @@ export default function NavBar() {
                     <Link href="https://www.youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw">
                         <YouTubeIcon />
                     </Link>
-                </Social>
-            </NavContainer>
+                </div>
+            </div>
         </header>
     );
 }

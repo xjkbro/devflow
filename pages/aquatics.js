@@ -7,7 +7,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -15,7 +14,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 import { Info, InfoTitle } from "@mui-treasury/components/info";
-import styling from "../styles/Category.module.css";
+import styles from "../styles/Category.module.css";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -48,7 +47,7 @@ const useStyles = makeStyles({
     },
 });
 export default function Aquatics() {
-    const styles = useStyles();
+    const classes = useStyles();
     const [aquatics, setAquatics] = useState([]);
     useEffect(() => {
         sanityClient
@@ -76,24 +75,24 @@ export default function Aquatics() {
     return (
         <div>
             <NavBar />
-            <div className={styling.bigTitle}>Aquatics</div>
-            <div className={styling.container}>
+            <div className={styles.bigTitle}>Aquatics</div>
+            <div className={styles.container}>
                 {aquatics.map((item) => (
-                    <div className={styling.itemContainer}>
+                    <div className={styles.itemContainer}>
                         <a href={`/aquatics/${item.slug.current}`}>
-                            <Card className={styles.root}>
+                            <Card className={classes.root}>
                                 <CardActionArea>
                                     <CardMedia
-                                        className={styles.card}
+                                        className={classes.card}
                                         image={urlFor(item.mainImage)}
                                         title={item.title}
                                     />
                                     <Box
                                         py={3}
                                         px={2}
-                                        className={styles.content}
+                                        className={classes.content}
                                     >
-                                        <Info className={styles.titles}>
+                                        <Info className={classes.titles}>
                                             <InfoTitle>{item.title}</InfoTitle>
                                         </Info>
                                     </Box>
@@ -107,31 +106,3 @@ export default function Aquatics() {
         </div>
     );
 }
-const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-`;
-const BigTitle = styled.div`
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    font-size: 3rem;
-    font-weight: 900;
-    text-transform: uppercase;
-`;
-
-const ItemContainer = styled.div`
-    margin: 10px;
-    margin-bottom: 30px;
-    transition: all 150ms ease-in;
-    :hover {
-        /* transform: scale(1.005); */
-        opacity: 1;
-        box-shadow: 0px 5px 5px #111;
-    }
-    .MuiPaper-root {
-        background-color: black;
-    }
-`;

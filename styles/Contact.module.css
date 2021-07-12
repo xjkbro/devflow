@@ -1,0 +1,100 @@
+.container {
+}
+.halves {
+    height: 300px;
+    width: 100%;
+    display: inline-flex;
+}
+.email {
+    height: 100%;
+    width: 50%;
+    background-color: #85b1cc;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 40px;
+    transition: all 150ms ease-in;
+}
+.email > h1 {
+    font-weight: 900;
+    font-size: 2rem;
+}
+.email > p {
+    padding-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    /* text-transform: uppercase; */
+}
+.email > h5 {
+    font-size: 1.1rem;
+    /* font-weight: 300; */
+}
+.email:hover {
+    filter: grayscale(100%);
+}
+
+.sponsor {
+    height: 100%;
+    width: 50%;
+    background-color: #667a86;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 40px;
+    transition: all 150ms ease-in;
+}
+.sponsor > h1 {
+    font-weight: 900;
+    font-size: 2rem;
+}
+.sponsor > p {
+    padding-bottom: 50px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    /* text-transform: uppercase; */
+}
+.sponsor:hover {
+    filter: grayscale(100%);
+}
+.sponsor:hover::after {
+    background-color: rgba(#000, 0.5);
+}
+.follow {
+    height: 300px;
+    background-color: #503b4a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms ease-in;
+}
+.follow > p {
+    padding-bottom: 50px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    /* text-transform: uppercase; */
+}
+.follow:hover {
+    filter: grayscale(100%);
+}
+.listItem {
+    display: inline;
+    margin: 10px;
+}
+.listItem * {
+    color: white;
+}
+.listItem > a > div > svg {
+    margin: 10px;
+    width: 75% !important;
+    height: 75% !important;
+    text-align: center;
+    transition: all 150ms ease-in;
+}
+.listItem > a > div > svg:hover {
+    transform: scale(1.05);
+    opacity: 1;
+    /* box-shadow: 0px 5px 5px #111; */
+}

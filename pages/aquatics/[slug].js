@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Error from "../error";
 import styled from "styled-components";
+import styles from "../../styles/Article.module.css";
 
 export default function SinglePage() {
     const [singlePost, setSinglePost] = useState(null);
@@ -47,18 +48,18 @@ export default function SinglePage() {
     return (
         <div>
             <NavBar />
-            <Image src={urlFor(singlePost.mainImage)} />
-            <Title>{singlePost.title}</Title>
-            <Author>by: {singlePost.name}</Author>
-            <Body>
+            <img className={styles.image} src={urlFor(singlePost.mainImage)} />
+            <div className={styles.title}>{singlePost.title}</div>
+            <div className={styles.author}>by: {singlePost.name}</div>
+            <div className={styles.body}>
                 <BlockContent
                     blocks={singlePost.body}
                     serializers={serializers}
                     projectId="d6vys1oo"
                     dataset="production"
                 />
-            </Body>
-            <Line />
+            </div>
+            <div className={styles.horizontalLine} />
             <Footer />
         </div>
     );

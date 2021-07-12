@@ -1,0 +1,55 @@
+.container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.heroImage {
+    /* width: 1500px;
+    height: 1216px; */
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: color-dodge;
+}
+.title {
+    position: absolute;
+    top: 500px;
+    right: 450px;
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 5px 5px 15px #000;
+    letter-spacing: 10px;
+}
+.subtitle {
+    position: absolute;
+    top: 600px;
+    right: 700px;
+    font-size: 2rem;
+    font-weight: 300;
+    text-shadow: 5px 5px 15px #000;
+    letter-spacing: 10px;
+}
+
+.subscribe {
+    position: absolute;
+    bottom: 100px;
+    right: 600px;
+}
+.subscribe > input {
+    height: 50px;
+    width: 500px;
+    color: #061922;
+    padding: 0 10px;
+    outline: none;
+}
+.subscribe > button {
+    background-color: #061922;
+    padding: 15px;
+}
+@media screen and (max-width: 700px) {
+    .heroTitle {
+        top: 200px;
+        left: 20px;
+        font-size: 1rem;
+    }
+}

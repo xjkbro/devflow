@@ -1,0 +1,87 @@
+.container {
+    height: 174px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    background-color: #061922;
+}
+
+.menuDrawer {
+    background-color: #061922;
+    height: 100%;
+    display: none;
+}
+.menuDrawer * {
+    color: white;
+}
+
+.mobileContainer {
+    height: 100%;
+    width: 100%;
+    display: none;
+    color: white;
+}
+.mobileContainer * {
+    color: white;
+}
+.navigation {
+    vertical-align: middle;
+    display: inline-flex;
+}
+.navigation > div > img {
+    cursor: pointer;
+}
+.navigation > a {
+    padding: 0 10px;
+    margin: auto 0px;
+    transition: color 100ms ease-in;
+}
+.navigation > a:hover {
+    transform: scale(1.05);
+    color: gray;
+    opacity: 1;
+}
+.social {
+    display: inline-flex;
+    cursor: pointer;
+}
+.social * {
+    width: 10px;
+    margin: auto;
+    padding: 0 10px;
+}
+.social > svg {
+    width: 2em;
+    transition: color 100ms ease-in;
+}
+.social > svg:hover {
+    transform: scale(1.05);
+    color: gray;
+    opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        font-size: 0.4em;
+        height: 0px;
+    }
+    .menuDrawer {
+        display: inline;
+    }
+    .mobileContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mobileContainer div > img {
+        width: 70vw;
+    }
+    .navigation {
+        display: none;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .social {
+        display: none;
+    }
+}

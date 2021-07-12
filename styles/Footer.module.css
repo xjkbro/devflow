@@ -1,0 +1,44 @@
+.container {
+    height: 100px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    background-color: #061922;
+}
+.footerNav {
+    vertical-align: middle;
+    display: inline-flex;
+}
+.footerNav > a {
+    padding: 0 10px;
+    margin: auto 0px;
+}
+.social {
+    display: inline-flex;
+    cursor: pointer;
+}
+.social > * {
+    width: 10px;
+    margin: auto;
+    padding: 0 10px;
+}
+.social > svg {
+    width: 2em;
+}
+.copyright {
+    margin: auto;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    padding-bottom: 20px;
+}
+@media screen and (max-width: 700px) {
+    .footerNav {
+        font-size: 0.4em;
+    }
+    .social {
+        display: none;
+    }
+    .copyright {
+        font-size: 0.4em;
+    }
+}

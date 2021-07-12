@@ -7,7 +7,7 @@ import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
 import BlockContent from "@sanity/block-content-to-react";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styles from "../styles/About.module.css";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -45,12 +45,12 @@ export default function About() {
     }, []);
     if (!team) return <Loading />;
     return (
-        <Container>
+        <div>
             <NavBar />
             {team.map((item) => (
-                <ItemContainer key={item._id}>
-                    <Image src={urlFor(item.image)} />
-                    <TextContainer>
+                <div className={styles.itemContainer} key={item._id}>
+                    <img className={styles.image} src={urlFor(item.image)} />
+                    <div className={styles.textContainer}>
                         <h1>{item.name}</h1>
                         <BlockContent
                             blocks={item.bio}
@@ -58,44 +58,10 @@ export default function About() {
                             projectId="d6vys1oo"
                             dataset="production"
                         />
-                    </TextContainer>
-                </ItemContainer>
+                    </div>
+                </div>
             ))}
             <Footer />
-        </Container>
+        </div>
     );
 }
-
-const Container = styled.div``;
-const ItemContainer = styled.div`
-    display: flex;
-    padding: 100px 200px;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    @media (max-width: 800px) {
-        flex-direction: column;
-        flex-wrap: column;
-        padding: 30px 50px;
-        div > div > p {
-            word-wrap: break-word;
-            justify-content: left;
-        }
-    }
-`;
-const TextContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-around;
-    width: 700px;
-    > h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        padding-bottom: 10px;
-    }
-`;
-const Image = styled.img`
-    height: 350px;
-    border-radius: 50%;
-`;

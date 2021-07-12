@@ -6,6 +6,7 @@ import styled from "styled-components";
 import BlockContent from "@sanity/block-content-to-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
     return (
@@ -13,7 +14,7 @@ export default function Home() {
             <NavBar />
             <Hero />
 
-            <Line />
+            <div className={styles.horizontalLine} />
             <Footer />
         </Container>
     );
