@@ -106,7 +106,7 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
     );
 }
 export const getServerSideProps = async ({ query: { page = 1 } }) => {
-    const maxPosts = 2;
+    const maxPosts = 3;
 
     const getNumberOfPosts = await sanityClient.fetch(
         `*[_type == "post"  && category->title == "Programming"]{}`
