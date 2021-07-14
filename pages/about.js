@@ -22,40 +22,11 @@ const serializers = {
         },
     },
 };
-export default function About() {
-    const [team, setTeam] = useState([]);
-    useEffect(() => {
-        sanityClient
-            .fetch(
-                `
-                *[_type == "author"]| order(_createdAt asc){
-                    name,
-                    _id,
-                    slug,
-                    image,
-                    bio,
-                }
-                `
-            )
-            .then((data) => {
-                console.log(data);
-                setTeam(data);
-            })
-            .catch(console.error);
-    }, []);
+export default function About({ team }) {
     if (!team) return <Loading />;
     return (
         <div className={styles.container}>
             <NavBar />
-            <script src="https://apis.google.com/js/platform.js"></script>
-
-            <div
-                class="g-ytsubscribe"
-                data-channelid="UCWzJk743eDpkpQaVbY2YsPw"
-                data-layout="default"
-                data-theme="dark"
-                data-count="default"
-            ></div>
             {team.map((item) => (
                 <>
                     <div className={styles.itemContainer} key={item._id}>
@@ -81,3 +52,19 @@ export default function About() {
         </div>
     );
 }
+export const getServerSideProps = async ({}) => {
+    const team = await sanityClient.fetch(
+        `*[_type == "author"]| order(_createdAt desc){
+                    name,
+                    _id,
+                    slug,
+                    image,
+                    bio,
+                }`
+    );
+    return {
+        props: {
+            team,
+        },
+    };
+};

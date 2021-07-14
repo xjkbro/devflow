@@ -88,6 +88,14 @@ export default function NavBar() {
                         <ListItemText primary={"Programming"} />
                     </ListItem>
                 </Link>
+                <Link href="/lifts">
+                    <ListItem button key={"Lifts"}>
+                        <ListItemIcon>
+                            <OpacityIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Lifts"} />
+                    </ListItem>
+                </Link>
                 <Link href="/aquatics">
                     <ListItem button key={"Aquatics"}>
                         <ListItemIcon>
@@ -139,6 +147,7 @@ export default function NavBar() {
                     <Link href="/">Home</Link>
                     <Link href="/about">About</Link>
                     <Link href="/programming">Programming</Link>
+                    <Link href="/lifts">Lifts</Link>
                     <Link href="/aquatics">Aquatics</Link>
                     <Link href="/contact">Contact</Link>
                 </nav>
