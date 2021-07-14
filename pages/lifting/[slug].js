@@ -7,11 +7,6 @@ import { useRouter } from "next/router";
 import Error from "../error";
 import styles from "../../styles/Article.module.css";
 
-// const builder = imageUrlBuilder(sanityClient);
-// function urlFor(source) {
-//     return builder.image(source);
-// }
-
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     return (
@@ -36,7 +31,7 @@ export default function SinglePage({ article }) {
 export async function getStaticProps({ params }) {
     const post = await sanityClient.fetch(
         `
-    *[slug.current == "${params.slug}" && category->title == "Lifts"][0]{
+    *[slug.current == "${params.slug}" && category->title == "Lifting"][0]{
         title,
         _id,
         slug,
