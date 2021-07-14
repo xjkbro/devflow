@@ -25,6 +25,7 @@
 .body iframe {
     margin: 0 auto;
     padding: 20px 0;
+    width: 90%;
 }
 
 .body div > pre {
@@ -33,4 +34,10 @@
     padding: 10px;
     box-shadow: 2px 2px 7px black;
     width: 75%;
+}
+@media screen and (max-width: 800px) {
+    .body iframe {
+        width: 95%;
+        height: 30vh;
+    }
 }
