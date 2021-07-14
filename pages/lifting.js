@@ -42,7 +42,7 @@ const useStyles = makeStyles({
         color: "white",
     },
 });
-export default function Lifts({ posts, page, totalPosts, maxPerPage }) {
+export default function Lifting({ posts, page, totalPosts, maxPerPage }) {
     const classes = useStyles();
     const router = useRouter();
     if (!posts) return <Loading />;
@@ -51,7 +51,7 @@ export default function Lifts({ posts, page, totalPosts, maxPerPage }) {
     return (
         <div>
             <NavBar />
-            <div className={styles.bigTitle}>Lifts</div>
+            <div className={styles.bigTitle}>Lifting</div>
             <div className={styles.smallTitle}>
                 {page} of {lastPage}
             </div>
