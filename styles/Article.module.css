@@ -27,7 +27,40 @@
     padding: 20px 0;
     width: 90%;
 }
+.body > div > ul {
+    padding-left: 1.5rem;
+}
+.body > div > ul > li {
+    list-style-type: disc;
+}
 
+.body > div > ul > li > ul {
+    padding-left: 1.5rem;
+}
+.body > div > ul > li > ul > li {
+    list-style-type: circle;
+}
+
+.body > div > ul > li > ul > li > ul {
+    padding-left: 1.5rem;
+}
+.body > div > ul > li > ul > li > ul > li {
+    list-style-type: square;
+}
+
+.body > div > ul > li > ul > li > ul > li > ul {
+    padding-left: 1.5rem;
+}
+.body > div > ul > li > ul > li > ul > li > ul > li {
+    list-style-type: decimal;
+}
+
+.body > div > ul > li > ul > li > ul > li > ul > li > ul {
+    padding-left: 1.5rem;
+}
+.body > div > ul > li > ul > li > ul > li > ul > li > ul > li {
+    list-style-type: "- ";
+}
 .body div > pre {
     margin: 5vh auto;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -35,6 +68,7 @@
     box-shadow: 2px 2px 7px black;
     width: 75%;
 }
+
 @media screen and (max-width: 800px) {
     .body iframe {
         width: 95%;
