@@ -19,7 +19,7 @@
 }
 .body {
     margin: 1rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 300;
 }
 .body iframe {
@@ -28,8 +28,9 @@
 }
 
 .body div > pre {
-    margin: 5vh 20vw;
+    margin: 5vh auto;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 5px;
-    box-shadow: 1px 1px 3px black;
+    padding: 10px;
+    box-shadow: 2px 2px 7px black;
+    width: 75%;
 }
