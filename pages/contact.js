@@ -17,7 +17,7 @@ export default function Contact() {
                         inqueries.
                     </p>
                     <h5>
-                        <strong>Email:</strong> jkdelara@devflow.com
+                        <strong>Email:</strong> jkdelara@thedevflow.com
                     </h5>
                 </div>
                 <div className={styles.sponsor}>
@@ -34,13 +34,13 @@ export default function Contact() {
                     <li className={styles.listItem}>
                         <SocialIcon
                             bgColor="#fff"
-                            url="https://twitter.com/devflow"
+                            url="https://twitter.com/thedevflow"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
                             bgColor="#fff"
-                            url="https://facebook.com/devflow"
+                            url="https://facebook.com/thedevflow"
                         />
                     </li>
                     <li className={styles.listItem}>

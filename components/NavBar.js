@@ -89,12 +89,12 @@ export default function NavBar() {
                         <ListItemText primary={"Programming"} />
                     </ListItem>
                 </Link>
-                <Link href="/lifts">
-                    <ListItem button key={"Lifts"}>
+                <Link href="/lifting">
+                    <ListItem button key={"Lifting"}>
                         <ListItemIcon>
                             <FitnessCenterIcon />
                         </ListItemIcon>
-                        <ListItemText primary={"Lifts"} />
+                        <ListItemText primary={"Lifting"} />
                     </ListItem>
                 </Link>
                 <Link href="/aquatics">
@@ -148,15 +148,15 @@ export default function NavBar() {
                     <Link href="/">Home</Link>
                     <Link href="/about">About</Link>
                     <Link href="/programming">Programming</Link>
-                    <Link href="/lifts">Lifts</Link>
+                    <Link href="/lifting">Lifting</Link>
                     <Link href="/aquatics">Aquatics</Link>
                     <Link href="/contact">Contact</Link>
                 </nav>
                 <div className={styles.social}>
-                    <Link href="https://www.twitter.com/devflow">
+                    <Link href="https://www.twitter.com/thedevflow">
                         <TwitterIcon />
                     </Link>
-                    <Link href="https://www.facebook.com/devflow">
+                    <Link href="https://www.facebook.com/thedevflow">
                         <FacebookIcon />
                     </Link>
                     <Link href="https://instagram.com/thedevflow">

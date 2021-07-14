@@ -128,7 +128,7 @@ export default function Aquatics({ posts, page, totalPosts, maxPerPage }) {
     );
 }
 export const getServerSideProps = async ({ query: { page = 1 } }) => {
-    const maxPosts = 3;
+    const maxPosts = 6;
 
     const getNumberOfPosts = await sanityClient.fetch(
         `count(*[_type == "post"  && category->title == "Aquatics"])`

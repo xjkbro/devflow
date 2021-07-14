@@ -68,7 +68,7 @@ export default function Lifts({ posts, page, totalPosts, maxPerPage }) {
                         date.getFullYear();
                     return (
                         <div className={styles.itemContainer}>
-                            <Link href={`/lifts/${item.slug.current}`}>
+                            <Link href={`/lifting/${item.slug.current}`}>
                                 <Card className={classes.root}>
                                     <CardActionArea>
                                         <CardMedia
@@ -111,14 +111,14 @@ export default function Lifts({ posts, page, totalPosts, maxPerPage }) {
             <div className={styles.pagination}>
                 <Button
                     className={styles.previous}
-                    onClick={() => router.push(`/lifts?page=${page - 1}`)}
+                    onClick={() => router.push(`/lifting?page=${page - 1}`)}
                     disabled={page <= 1}
                 >
                     Previous
                 </Button>
                 <Button
                     className={classes.button}
-                    onClick={() => router.push(`/lifts?page=${page + 1}`)}
+                    onClick={() => router.push(`/lifting?page=${page + 1}`)}
                     disabled={page == lastPage}
                 >
                     Next
@@ -130,14 +130,14 @@ export default function Lifts({ posts, page, totalPosts, maxPerPage }) {
     );
 }
 export const getServerSideProps = async ({ query: { page = 1 } }) => {
-    const maxPosts = 3;
+    const maxPosts = 6;
 
     const getNumberOfPosts = await sanityClient.fetch(
-        `count(*[_type == "post"  && category->title == "Lifts"])`
+        `count(*[_type == "post"  && category->title == "Lifting"])`
     );
     const posts = await sanityClient.fetch(
         `
-        *[_type == "post"  && category->title == "Lifts"][${ArticlePagination(
+        *[_type == "post"  && category->title == "Lifting"][${ArticlePagination(
             page,
             maxPosts
         )}] | order(_createdAt desc) {
