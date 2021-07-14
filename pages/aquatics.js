@@ -4,31 +4,27 @@ import NavBar from "../components/NavBar";
 import Link from "next/link";
 import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
-import getYouTubeId from "get-youtube-id";
-import YouTube from "react-youtube";
-import { useEffect, useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
-import { Info, InfoTitle } from "@mui-treasury/components/info";
+import {
+    Info,
+    InfoTitle,
+    InfoSubtitle,
+    InfoCaption,
+} from "@mui-treasury/components/info";
 import styles from "../styles/Category.module.css";
+import { useRouter } from "next/router";
+import Button from "@material-ui/core/Button";
+import { ArticlePagination } from "../utils/ArticlePagination";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
     return builder.image(source);
 }
-const serializers = {
-    types: {
-        youtube: ({ node }) => {
-            const { url } = node;
-            const id = getYouTubeId(url);
-            return <YouTube videoId={id} />;
-        },
-    },
-};
+
 const useStyles = makeStyles({
     card: {
         minWidth: 426,
@@ -46,63 +42,121 @@ const useStyles = makeStyles({
         color: "white",
     },
 });
-export default function Aquatics() {
+export default function Aquatics({ posts, page, totalPosts, maxPerPage }) {
     const classes = useStyles();
-    const [aquatics, setAquatics] = useState([]);
-    useEffect(() => {
-        sanityClient
-            .fetch(
-                `
-                *[_type == "post"  && category->title == "Aquatics"] | order(_createdAt desc){
-                    title,
-                    _id,
-                    slug,
-                    author->{name, _id, slug,image, bio},
-                    mainImage,
-                    category->{title,_id,description},
-                    publishedAt,
-                    body,
-                }
-                `
-            )
-            .then((data) => {
-                console.log(data);
-                setAquatics(data);
-            })
-            .catch(console.error);
-    }, []);
-    if (!aquatics) return <Loading />;
+    const router = useRouter();
+    if (!posts) return <Loading />;
+    const lastPage = Math.ceil(totalPosts / maxPerPage);
+    console.log(posts);
     return (
         <div>
             <NavBar />
             <div className={styles.bigTitle}>Aquatics</div>
-            <div className={styles.container}>
-                {aquatics.map((item) => (
-                    <div className={styles.itemContainer}>
-                        <a href={`/aquatics/${item.slug.current}`}>
-                            <Card className={classes.root}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.card}
-                                        image={urlFor(item.mainImage)}
-                                        title={item.title}
-                                    />
-                                    <Box
-                                        py={3}
-                                        px={2}
-                                        className={classes.content}
-                                    >
-                                        <Info className={classes.titles}>
-                                            <InfoTitle>{item.title}</InfoTitle>
-                                        </Info>
-                                    </Box>
-                                </CardActionArea>
-                            </Card>
-                        </a>
-                    </div>
-                ))}
+            <div className={styles.smallTitle}>
+                {page} of {lastPage}
             </div>
+            <div className={styles.smallTitle}>{totalPosts} posts</div>
+            <div className={styles.container}>
+                {posts.map((item) => {
+                    let date = new Date(item.publishedAt);
+                    let itemDate =
+                        date.getMonth() +
+                        1 +
+                        "-" +
+                        date.getDate() +
+                        "-" +
+                        date.getFullYear();
+                    return (
+                        <div className={styles.itemContainer}>
+                            <Link href={`/aquatics/${item.slug.current}`}>
+                                <Card className={classes.root}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.card}
+                                            image={urlFor(item.mainImage)}
+                                            title={item.title}
+                                        />
+                                        <Box
+                                            py={3}
+                                            px={2}
+                                            className={classes.content}
+                                        >
+                                            <Info className={classes.titles}>
+                                                <InfoSubtitle
+                                                    style={{
+                                                        fontSize: "12px",
+                                                    }}
+                                                >
+                                                    {itemDate}
+                                                </InfoSubtitle>
+                                                <InfoTitle>Buds 2019</InfoTitle>
+                                                <InfoCaption>
+                                                    {item.body[0].children[0].text.substring(
+                                                        0,
+                                                        25
+                                                    )}
+                                                    ...
+                                                </InfoCaption>
+                                            </Info>
+                                        </Box>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </div>
+                    );
+                })}
+            </div>
+            <div className={styles.pagination}>
+                <Button
+                    className={styles.previous}
+                    onClick={() => router.push(`/aquatics?page=${page - 1}`)}
+                    disabled={page <= 1}
+                >
+                    Previous
+                </Button>
+                <Button
+                    className={classes.button}
+                    onClick={() => router.push(`/aquatics?page=${page + 1}`)}
+                    disabled={page == lastPage}
+                >
+                    Next
+                </Button>
+            </div>
+            <div className={styles.horizontalLine} />
             <Footer />
         </div>
     );
 }
+export const getServerSideProps = async ({ query: { page = 1 } }) => {
+    const maxPosts = 3;
+
+    const getNumberOfPosts = await sanityClient.fetch(
+        `count(*[_type == "post"  && category->title == "Aquatics"])`
+    );
+    const posts = await sanityClient.fetch(
+        `
+        *[_type == "post"  && category->title == "Aquatics"][${ArticlePagination(
+            page,
+            maxPosts
+        )}] | order(_createdAt desc) {
+            title,
+            _id,
+            slug,
+            author->{name, _id, slug,image, bio},
+            mainImage,
+            category->{title,_id,description},
+            publishedAt,
+            body,
+        } 
+        `
+    );
+    // console.log(posts);
+    return {
+        props: {
+            posts,
+            page: +page,
+            totalPosts: getNumberOfPosts,
+            maxPerPage: maxPosts,
+        },
+    };
+};

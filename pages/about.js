@@ -45,21 +45,28 @@ export default function About() {
     }, []);
     if (!team) return <Loading />;
     return (
-        <div>
+        <div className={styles.container}>
             <NavBar />
             {team.map((item) => (
-                <div className={styles.itemContainer} key={item._id}>
-                    <img className={styles.image} src={urlFor(item.image)} />
-                    <div className={styles.textContainer}>
-                        <h1>{item.name}</h1>
-                        <BlockContent
-                            blocks={item.bio}
-                            serializers={serializers}
-                            projectId="d6vys1oo"
-                            dataset="production"
+                <>
+                    <div className={styles.itemContainer} key={item._id}>
+                        <img
+                            className={styles.image}
+                            src={urlFor(item.image)}
                         />
+                        <div className={styles.textContainer}>
+                            <h1>{item.name}</h1>
+                            <BlockContent
+                                blocks={item.bio}
+                                serializers={serializers}
+                                projectId="d6vys1oo"
+                                dataset="production"
+                                className="textBody"
+                            />
+                        </div>
                     </div>
-                </div>
+                    <div className={styles.horizontalLine} />
+                </>
             ))}
             <Footer />
         </div>

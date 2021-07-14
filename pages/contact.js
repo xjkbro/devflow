@@ -7,7 +7,7 @@ import styles from "../styles/Contact.module.css";
 
 export default function Contact() {
     return (
-        <div className="styles.container">
+        <div className={styles.container}>
             <NavBar />
             <div className={styles.halves}>
                 <div className={styles.email}>
@@ -33,42 +33,36 @@ export default function Contact() {
                 <ul>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://twitter.com/devflow"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://facebook.com/devflow"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://instagram.com/thedevflow"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://linkedin.com/jkdelara"
                         />
                     </li>
                     <li className={styles.listItem}>
                         <SocialIcon
-                            style={{ height: 100, width: 100 }}
                             bgColor="#fff"
                             url="https://github.com/xjkbro"
                         />

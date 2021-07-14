@@ -5,14 +5,22 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 15px;
+    margin-top: 50px;
 }
 .bigTitle {
     display: flex;
     justify-content: center;
     padding-top: 20px;
-    padding-bottom: 50px;
     font-size: 3rem;
     font-weight: 900;
+    text-transform: uppercase;
+}
+.smallTitle {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    font-size: 0.7rem;
+    font-weight: 300;
     text-transform: uppercase;
 }
 .itemContainer {
@@ -50,4 +58,22 @@
 .horizontalLine {
     margin-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 25px;
+        /* margin-top: 50px; */
+        margin: 50px 10px 30px 10px;
+    }
+    .bigTitle {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        font-size: 2rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
 }

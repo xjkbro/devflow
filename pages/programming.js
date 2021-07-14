@@ -4,33 +4,27 @@ import NavBar from "../components/NavBar";
 import Link from "next/link";
 import sanityClient from "../utils/client";
 import imageUrlBuilder from "@sanity/image-url";
-import getYouTubeId from "get-youtube-id";
-import YouTube from "react-youtube";
-import { useEffect, useState } from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
-import { Info, InfoTitle } from "@mui-treasury/components/info";
+import {
+    Info,
+    InfoTitle,
+    InfoSubtitle,
+    InfoCaption,
+} from "@mui-treasury/components/info";
 import styles from "../styles/Category.module.css";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
+import { ArticlePagination } from "../utils/ArticlePagination";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
     return builder.image(source);
 }
-const serializers = {
-    types: {
-        youtube: ({ node }) => {
-            const { url } = node;
-            const id = getYouTubeId(url);
-            return <YouTube videoId={id} />;
-        },
-    },
-};
+
 const useStyles = makeStyles({
     card: {
         minWidth: 426,
@@ -53,35 +47,62 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
     const router = useRouter();
     if (!posts) return <Loading />;
     const lastPage = Math.ceil(totalPosts / maxPerPage);
+    console.log(posts);
     return (
         <div>
             <NavBar />
             <div className={styles.bigTitle}>Programming</div>
+            <div className={styles.smallTitle}>
+                {page} of {lastPage}
+            </div>
+            <div className={styles.smallTitle}>{totalPosts} posts</div>
             <div className={styles.container}>
-                {posts.map((item) => (
-                    <div className={styles.itemContainer}>
-                        <a href={`/programming/${item.slug.current}`}>
-                            <Card className={classes.root}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.card}
-                                        image={urlFor(item.mainImage)}
-                                        title={item.title}
-                                    />
-                                    <Box
-                                        py={3}
-                                        px={2}
-                                        className={classes.content}
-                                    >
-                                        <Info className={classes.titles}>
-                                            <InfoTitle>{item.title}</InfoTitle>
-                                        </Info>
-                                    </Box>
-                                </CardActionArea>
-                            </Card>
-                        </a>
-                    </div>
-                ))}
+                {posts.map((item) => {
+                    let date = new Date(item.publishedAt);
+                    let itemDate =
+                        date.getMonth() +
+                        1 +
+                        "-" +
+                        date.getDate() +
+                        "-" +
+                        date.getFullYear();
+                    return (
+                        <div className={styles.itemContainer}>
+                            <Link href={`/programming/${item.slug.current}`}>
+                                <Card className={classes.root}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.card}
+                                            image={urlFor(item.mainImage)}
+                                            title={item.title}
+                                        />
+                                        <Box
+                                            py={3}
+                                            px={2}
+                                            className={classes.content}
+                                        >
+                                            <Info className={classes.titles}>
+                                                <InfoSubtitle
+                                                    style={{ fontSize: "12px" }}
+                                                >
+                                                    {itemDate}
+                                                </InfoSubtitle>
+                                                <InfoTitle>Buds 2019</InfoTitle>
+                                                <InfoCaption>
+                                                    {item.body[0].children[0].text.substring(
+                                                        0,
+                                                        25
+                                                    )}
+                                                    ...
+                                                </InfoCaption>
+                                            </Info>
+                                        </Box>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
 
             <div className={styles.pagination}>
@@ -109,7 +130,7 @@ export const getServerSideProps = async ({ query: { page = 1 } }) => {
     const maxPosts = 3;
 
     const getNumberOfPosts = await sanityClient.fetch(
-        `*[_type == "post"  && category->title == "Programming"]{}`
+        `count(*[_type == "post"  && category->title == "Programming"])`
     );
     const posts = await sanityClient.fetch(
         `
@@ -133,15 +154,8 @@ export const getServerSideProps = async ({ query: { page = 1 } }) => {
         props: {
             posts,
             page: +page,
-            totalPosts: getNumberOfPosts.length,
+            totalPosts: getNumberOfPosts,
             maxPerPage: maxPosts,
         },
     };
-};
-export const ArticlePagination = (page, maxPosts) => {
-    // console.log(parseInt(page));
-    let first = maxPosts * (parseInt(page) - 1);
-    let last = maxPosts * parseInt(page);
-    // console.log(first, last);
-    return `${first}...${last}`;
 };
