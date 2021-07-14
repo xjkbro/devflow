@@ -19,6 +19,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import CodeIcon from "@material-ui/icons/Code";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
 import OpacityIcon from "@material-ui/icons/Opacity";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -91,7 +92,7 @@ export default function NavBar() {
                 <Link href="/lifts">
                     <ListItem button key={"Lifts"}>
                         <ListItemIcon>
-                            <OpacityIcon />
+                            <FitnessCenterIcon />
                         </ListItemIcon>
                         <ListItemText primary={"Lifts"} />
                     </ListItem>

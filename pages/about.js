@@ -36,6 +36,7 @@ export default function About({ team }) {
                         />
                         <div className={styles.textContainer}>
                             <h1>{item.name}</h1>
+                            <h3>{item.role}</h3>
                             <BlockContent
                                 blocks={item.bio}
                                 serializers={serializers}
@@ -58,6 +59,7 @@ export const getServerSideProps = async ({}) => {
                     name,
                     _id,
                     slug,
+                    role,
                     image,
                     bio,
                 }`
