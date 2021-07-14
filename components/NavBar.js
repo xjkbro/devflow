@@ -23,7 +23,7 @@ import OpacityIcon from "@material-ui/icons/Opacity";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
-
+// import YoutubeSubscribeButton from "deku-youtube-subscribe-button";
 import styles from "../styles/NavBar.module.css";
 
 const useStyles = makeStyles({
@@ -112,6 +112,7 @@ export default function NavBar() {
             <Head>
                 <title>DevFlow</title>
                 <link rel="icon" href="/favicon.ico" />
+                {/* <script src="https://apis.google.com/js/platform.js"></script> */}
             </Head>
             <div className={styles.mobileContainer}>
                 <Image
@@ -152,6 +153,7 @@ export default function NavBar() {
                         <InstagramIcon />
                     </Link>
                     <Link href="https://www.youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw">
+                        {/* <YoutubeSubscribeButton channel-id="UCWzJk743eDpkpQaVbY2YsPw" /> */}
                         <YouTubeIcon />
                     </Link>
                 </div>
@@ -159,92 +161,3 @@ export default function NavBar() {
         </header>
     );
 }
-
-const NavContainer = styled.div`
-    height: 174px;
-    width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
-    background-color: #061922;
-    @media (max-width: 700px) {
-        font-size: 0.4em;
-        height: 0px;
-    }
-`;
-const MenuDrawer = styled.div`
-    background-color: #061922;
-    .MuiSvgIcon-root {
-        color: white;
-    }
-    .MuiTypography-root {
-        color: white;
-    }
-    height: 100%;
-    display: none;
-
-    @media (max-width: 700px) {
-        display: inline;
-    }
-`;
-const MobileContainer = styled.div`
-    .MuiSvgIcon-root {
-        color: white;
-    }
-    .MuiTypography-root {
-        color: white;
-    }
-    height: 100%;
-    width: 100%;
-    display: none;
-
-    @media (max-width: 700px) {
-        display: flex;
-        justify-content: center;
-
-        align-items: center;
-        div > img {
-            width: 70vw;
-        }
-    }
-`;
-const Navigation = styled.nav`
-    vertical-align: middle;
-    display: inline-flex;
-    > div > img {
-        cursor: pointer;
-    }
-    > a {
-        padding: 0 10px;
-        margin: auto 0px;
-        transition: color 100ms ease-in;
-        :hover {
-            transform: scale(1.05);
-            color: gray;
-            opacity: 1;
-        }
-    }
-    @media (max-width: 700px) {
-        display: none;
-    }
-`;
-const Social = styled.div`
-    display: inline-flex;
-    cursor: pointer;
-    > * {
-        width: 10px;
-        margin: auto;
-        padding: 0 10px;
-    }
-    .MuiSvgIcon-root {
-        width: 2em;
-        transition: color 100ms ease-in;
-        :hover {
-            transform: scale(1.05);
-            color: gray;
-            opacity: 1;
-        }
-    }
-    @media (max-width: 1200px) {
-        display: none;
-    }
-`;

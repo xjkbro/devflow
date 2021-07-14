@@ -47,6 +47,15 @@ export default function About() {
     return (
         <div className={styles.container}>
             <NavBar />
+            <script src="https://apis.google.com/js/platform.js"></script>
+
+            <div
+                class="g-ytsubscribe"
+                data-channelid="UCWzJk743eDpkpQaVbY2YsPw"
+                data-layout="default"
+                data-theme="dark"
+                data-count="default"
+            ></div>
             {team.map((item) => (
                 <>
                     <div className={styles.itemContainer} key={item._id}>
