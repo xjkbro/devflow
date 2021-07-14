@@ -15,6 +15,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 import { Info, InfoTitle } from "@mui-treasury/components/info";
 import styles from "../styles/Category.module.css";
+import { useRouter } from "next/router";
+import Button from "@material-ui/core/Button";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -46,38 +48,17 @@ const useStyles = makeStyles({
         color: "white",
     },
 });
-export default function Programming() {
+export default function Programming({ posts, page, totalPosts, maxPerPage }) {
     const classes = useStyles();
-    const [programming, setProgramming] = useState([]);
-    useEffect(() => {
-        sanityClient
-            .fetch(
-                `
-                *[_type == "post"  && category->title == "Programming"] | order(_createdAt desc){
-                    title,
-                    _id,
-                    slug,
-                    author->{name, _id, slug,image, bio},
-                    mainImage,
-                    category->{title,_id,description},
-                    publishedAt,
-                    body,
-                }
-                `
-            )
-            .then((data) => {
-                console.log(data);
-                setProgramming(data);
-            })
-            .catch(console.error);
-    }, []);
-    if (!programming) return <Loading />;
+    const router = useRouter();
+    if (!posts) return <Loading />;
+    const lastPage = Math.ceil(totalPosts / maxPerPage);
     return (
         <div>
             <NavBar />
             <div className={styles.bigTitle}>Programming</div>
             <div className={styles.container}>
-                {programming.map((item) => (
+                {posts.map((item) => (
                     <div className={styles.itemContainer}>
                         <a href={`/programming/${item.slug.current}`}>
                             <Card className={classes.root}>
@@ -102,7 +83,65 @@ export default function Programming() {
                     </div>
                 ))}
             </div>
+
+            <div className={styles.pagination}>
+                <Button
+                    className={styles.previous}
+                    onClick={() => router.push(`/programming?page=${page - 1}`)}
+                    disabled={page <= 1}
+                >
+                    Previous
+                </Button>
+                <Button
+                    className={classes.button}
+                    onClick={() => router.push(`/programming?page=${page + 1}`)}
+                    disabled={page == lastPage}
+                >
+                    Next
+                </Button>
+            </div>
+            <div className={styles.horizontalLine} />
             <Footer />
         </div>
     );
 }
+export const getServerSideProps = async ({ query: { page = 1 } }) => {
+    const maxPosts = 2;
+
+    const getNumberOfPosts = await sanityClient.fetch(
+        `*[_type == "post"  && category->title == "Programming"]{}`
+    );
+    const posts = await sanityClient.fetch(
+        `
+        *[_type == "post"  && category->title == "Programming"][${ArticlePagination(
+            page,
+            maxPosts
+        )}] | order(_createdAt desc) {
+            title,
+            _id,
+            slug,
+            author->{name, _id, slug,image, bio},
+            mainImage,
+            category->{title,_id,description},
+            publishedAt,
+            body,
+        } 
+        `
+    );
+    // console.log(posts);
+    return {
+        props: {
+            posts,
+            page: +page,
+            totalPosts: getNumberOfPosts.length,
+            maxPerPage: maxPosts,
+        },
+    };
+};
+export const ArticlePagination = (page, maxPosts) => {
+    // console.log(parseInt(page));
+    let first = maxPosts * (parseInt(page) - 1);
+    let last = maxPosts * parseInt(page);
+    // console.log(first, last);
+    return `${first}...${last}`;
+};
