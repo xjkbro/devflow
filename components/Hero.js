@@ -1,4 +1,5 @@
 import styles from "../styles/Hero.module.css";
+import Subscribe from "../components/Subscribe";
 // import Image from "next/image";
 
 export default function Hero() {
@@ -9,10 +10,11 @@ export default function Hero() {
             <h1 className={styles.title}>One life. No Regrets.</h1>
             <h3 className={styles.subtitle}>Make the best of it.</h3>
 
-            <div className={styles.subscribe}>
+            <Subscribe />
+            {/* <div className={styles.subscribe}>
                 <input type="text" placeholder="EMAIL" />
                 <button>SUBSCRIBE</button>
-            </div>
+            </div> */}
         </div>
     );
 }

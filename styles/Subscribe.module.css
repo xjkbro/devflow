@@ -1,0 +1,39 @@
+.subscribe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 50.5%;
+    text-align: center;
+}
+.subscribe > input {
+    height: 50px;
+    width: 500px;
+    color: #061922;
+    padding: 0 10px;
+    outline: none;
+}
+.subscribe > button {
+    background-color: #061922;
+    padding: 15px;
+}
+
+@media screen and (max-width: 1000px) {
+    .subscribe > input {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .subscribe {
+        padding-top: 45.5%;
+        font-size: 0.5rem;
+    }
+    .subscribe > input {
+        height: 30px;
+        width: 300px;
+    }
+    .subscribe > button {
+        padding: 10px;
+    }
+}
