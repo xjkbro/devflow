@@ -142,10 +142,10 @@ export const getServerSideProps = async ({ query: { page = 1 } }) => {
     );
     const posts = await sanityClient.fetch(
         `
-        *[_type == "post"  && category->title == "Aquatics"][${ArticlePagination(
+        *[_type == "post"  && category->title == "Aquatics"] | order(publishedAt desc) [${ArticlePagination(
             page,
             maxPosts
-        )}] | order(publishedAt desc) {
+        )}] {
             title,
             _id,
             slug,
