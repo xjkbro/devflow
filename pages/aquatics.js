@@ -19,6 +19,7 @@ import styles from "../styles/Category.module.css";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
 import { ArticlePagination } from "../utils/ArticlePagination";
+import ViewCounter from "../components/ViewCounter";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -87,7 +88,11 @@ export default function Aquatics({ posts, page, totalPosts, maxPerPage }) {
                                                         fontSize: "12px",
                                                     }}
                                                 >
-                                                    {itemDate}
+                                                    {/* {itemDate} */}
+                                                    <ViewCounter
+                                                        view={false}
+                                                        slug={`${item.slug.current}`}
+                                                    />
                                                 </InfoSubtitle>
                                                 <InfoTitle>Buds 2019</InfoTitle>
                                                 <InfoCaption>

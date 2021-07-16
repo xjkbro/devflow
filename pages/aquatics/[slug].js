@@ -6,6 +6,7 @@ import { urlFor, sanityClient, serializers } from "../../utils/sanity";
 import { useRouter } from "next/router";
 import Error from "../error";
 import styles from "../../styles/Article.module.css";
+import ViewCounter from "../../components/ViewCounter";
 
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
@@ -15,6 +16,7 @@ export default function SinglePage({ article }) {
             <img className={styles.image} src={urlFor(article.mainImage)} />
             <div className={styles.title}>{article.title}</div>
             <div className={styles.author}>by: {article.name}</div>
+            <ViewCounter view={true} slug={`${article.slug.current}`} />
             <div className={styles.body}>
                 <BlockContent
                     blocks={article.body}

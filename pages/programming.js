@@ -19,6 +19,7 @@ import styles from "../styles/Category.module.css";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
 import { ArticlePagination } from "../utils/ArticlePagination";
+import ViewCounter from "../components/ViewCounter";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -66,6 +67,7 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
                         date.getDate() +
                         "-" +
                         date.getFullYear();
+                    console.log(item.slug.current);
                     return (
                         <div className={styles.itemContainer}>
                             <Link href={`/programming/${item.slug.current}`}>
@@ -85,7 +87,11 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
                                                 <InfoSubtitle
                                                     style={{ fontSize: "12px" }}
                                                 >
-                                                    {itemDate}
+                                                    {/* {itemDate} */}
+                                                    <ViewCounter
+                                                        view={false}
+                                                        slug={`${item.slug.current}`}
+                                                    />
                                                 </InfoSubtitle>
                                                 <InfoTitle>
                                                     {item.title}

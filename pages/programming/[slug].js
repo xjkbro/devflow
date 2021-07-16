@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Error from "../error";
 import styles from "../../styles/Article.module.css";
 import imageUrlBuilder from "@sanity/image-url";
+import ViewCounter from "../../components/ViewCounter";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -21,6 +22,7 @@ export default function SinglePage({ article }) {
             <img className={styles.image} src={urlFor(article.mainImage)} />
             <div className={styles.title}>{article.title}</div>
             <div className={styles.author}>by: {article.name}</div>
+            <ViewCounter view={true} slug={`${article.slug.current}`} />
             <div className={styles.body}>
                 <BlockContent
                     blocks={article.body}
@@ -54,7 +56,7 @@ export async function getStaticProps({ params }) {
     }
     `
     );
-    console.log(post);
+    // console.log(post);
     return {
         props: {
             article: post,
