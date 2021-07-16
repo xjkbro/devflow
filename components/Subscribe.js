@@ -22,17 +22,18 @@ export default function Subscribe() {
         const { error } = await res.json();
         if (error) {
             // 4. If there was an error, update the message in state.
-            setMessage(error);
+            setMessage(
+                "Something went wrong. You're probably already subscribed. "
+            );
             return;
         }
         // 5. Clear the input value and show a success message.
         inputEl.current.value = "";
-        setMessage("Success! 🎉 You are now subscribed to the newsletter.");
+        setMessage("Success! You are now subscribed to the newsletter.");
     };
 
     return (
         <form onSubmit={subscribe} className={styles.subscribe}>
-            {/* <label htmlFor="email-input">{'Email Address'}</label> */}
             <div>{message ? message : ``}</div>
             <input
                 id="email-input"
