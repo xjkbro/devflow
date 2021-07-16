@@ -145,7 +145,7 @@ export const getServerSideProps = async ({ query: { page = 1 } }) => {
         *[_type == "post"  && category->title == "Programming"][${ArticlePagination(
             page,
             maxPosts
-        )}] | order(_createdAt desc) {
+        )}] | order(publishedAt desc) {
             title,
             _id,
             slug,
