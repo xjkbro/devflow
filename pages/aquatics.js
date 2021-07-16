@@ -94,7 +94,9 @@ export default function Aquatics({ posts, page, totalPosts, maxPerPage }) {
                                                         slug={`${item.slug.current}`}
                                                     />
                                                 </InfoSubtitle>
-                                                <InfoTitle>Buds 2019</InfoTitle>
+                                                <InfoTitle>
+                                                    {item.title}
+                                                </InfoTitle>
                                                 <InfoCaption>
                                                     {item.body[0].children[0].text.substring(
                                                         0,
