@@ -20,6 +20,8 @@ import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
 import { ArticlePagination } from "../utils/ArticlePagination";
 import ViewCounter from "../components/ViewCounter";
+import useSWR from "swr";
+import groq from "groq";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -43,11 +45,40 @@ const useStyles = makeStyles({
         color: "white",
     },
 });
-export default function Programming({ posts, page, totalPosts, maxPerPage }) {
-    const classes = useStyles();
+export default function Programming() {
+    const maxPosts = 6;
     const router = useRouter();
-    if (!posts) return <Loading />;
-    const lastPage = Math.ceil(totalPosts / maxPerPage);
+    let page = router.query.page;
+    if (!page) page = 1;
+    console.log(page);
+    const getNumberOfPosts = useSWR(
+        groq`count(*[_type == "post"  && category->title == "Programming"])`,
+        (query) => sanityClient.fetch(query)
+    );
+    const totalPosts = getNumberOfPosts.data;
+    const getPosts = useSWR(
+        groq`
+        *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
+            page,
+            maxPosts
+        )}] {
+            title,
+            _id,
+            slug,
+            author->{name, _id, slug,image, bio},
+            mainImage,
+            category->{title,_id,description},
+            publishedAt,
+            body,
+        } 
+        `,
+        (query) => sanityClient.fetch(query)
+    );
+    const posts = getPosts.data;
+
+    const classes = useStyles();
+    // if (!posts) return <Loading />;
+    const lastPage = Math.ceil(totalPosts / maxPosts);
     console.log(posts);
     return (
         <div>
@@ -58,59 +89,69 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
             </div>
             <div className={styles.smallTitle}>{totalPosts} posts</div>
             <div className={styles.container}>
-                {posts.map((item) => {
-                    let date = new Date(item.publishedAt);
-                    let itemDate =
-                        date.getMonth() +
-                        1 +
-                        "-" +
-                        date.getDate() +
-                        "-" +
-                        date.getFullYear();
-                    console.log(item.slug.current);
-                    return (
-                        <div className={styles.itemContainer}>
-                            <Link href={`/programming/${item.slug.current}`}>
-                                <Card className={classes.root}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            className={classes.card}
-                                            image={urlFor(item.mainImage)}
-                                            title={item.title}
-                                        />
-                                        <Box
-                                            py={3}
-                                            px={2}
-                                            className={classes.content}
-                                        >
-                                            <Info className={classes.titles}>
-                                                <InfoSubtitle
-                                                    style={{ fontSize: "12px" }}
+                {!posts ? (
+                    <Loading />
+                ) : (
+                    posts.map((item) => {
+                        let date = new Date(item.publishedAt);
+                        let itemDate =
+                            date.getMonth() +
+                            1 +
+                            "-" +
+                            date.getDate() +
+                            "-" +
+                            date.getFullYear();
+                        console.log(item.slug.current);
+                        return (
+                            <div className={styles.itemContainer}>
+                                <Link
+                                    href={`/programming/${item.slug.current}`}
+                                >
+                                    <Card className={classes.root}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                className={classes.card}
+                                                image={urlFor(item.mainImage)}
+                                                title={item.title}
+                                            />
+                                            <Box
+                                                py={3}
+                                                px={2}
+                                                className={classes.content}
+                                            >
+                                                <Info
+                                                    className={classes.titles}
                                                 >
-                                                    {/* {itemDate} */}
-                                                    <ViewCounter
-                                                        view={false}
-                                                        slug={`${item.slug.current}`}
-                                                    />
-                                                </InfoSubtitle>
-                                                <InfoTitle>
-                                                    {item.title}
-                                                </InfoTitle>
-                                                <InfoCaption>
-                                                    {item.body[0].children[0].text.substring(
-                                                        0,
-                                                        25
-                                                    )}
-                                                    ...
-                                                </InfoCaption>
-                                            </Info>
-                                        </Box>
-                                    </CardActionArea>
-                                </Card>
-                            </Link>
-                        </div>
-                    );
-                })}
+                                                    <InfoSubtitle
+                                                        style={{
+                                                            fontSize: "12px",
+                                                        }}
+                                                    >
+                                                        {/* {itemDate} */}
+                                                        <ViewCounter
+                                                            view={false}
+                                                            slug={`${item.slug.current}`}
+                                                        />
+                                                    </InfoSubtitle>
+                                                    <InfoTitle>
+                                                        {item.title}
+                                                    </InfoTitle>
+                                                    <InfoCaption>
+                                                        {item.body[0].children[0].text.substring(
+                                                            0,
+                                                            25
+                                                        )}
+                                                        ...
+                                                    </InfoCaption>
+                                                </Info>
+                                            </Box>
+                                        </CardActionArea>
+                                    </Card>
+                                </Link>
+                            </div>
+                        );
+                    })
+                )}
             </div>
 
             <div className={styles.pagination}>
@@ -134,36 +175,36 @@ export default function Programming({ posts, page, totalPosts, maxPerPage }) {
         </div>
     );
 }
-export const getServerSideProps = async ({ query: { page = 1 } }) => {
-    const maxPosts = 6;
+// export const getServerSideProps = async ({ query: { page = 1 } }) => {
+//     const maxPosts = 6;
 
-    const getNumberOfPosts = await sanityClient.fetch(
-        `count(*[_type == "post"  && category->title == "Programming"])`
-    );
-    const posts = await sanityClient.fetch(
-        `
-        *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
-            page,
-            maxPosts
-        )}] {
-            title,
-            _id,
-            slug,
-            author->{name, _id, slug,image, bio},
-            mainImage,
-            category->{title,_id,description},
-            publishedAt,
-            body,
-        } 
-        `
-    );
-    // console.log(posts);
-    return {
-        props: {
-            posts,
-            page: +page,
-            totalPosts: getNumberOfPosts,
-            maxPerPage: maxPosts,
-        },
-    };
-};
+//     const getNumberOfPosts = await sanityClient.fetch(
+//         `count(*[_type == "post"  && category->title == "Programming"])`
+//     );
+//     const posts = await sanityClient.fetch(
+//         `
+//         *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
+//             page,
+//             maxPosts
+//         )}] {
+//             title,
+//             _id,
+//             slug,
+//             author->{name, _id, slug,image, bio},
+//             mainImage,
+//             category->{title,_id,description},
+//             publishedAt,
+//             body,
+//         }
+//         `
+//     );
+//     // console.log(posts);
+//     return {
+//         props: {
+//             posts,
+//             page: +page,
+//             totalPosts: getNumberOfPosts,
+//             maxPerPage: maxPosts,
+//         },
+//     };
+// };

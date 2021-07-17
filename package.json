@@ -20,6 +20,7 @@
     "deku-youtube-subscribe-button": "^1.1.2",
     "firebase-admin": "^9.11.0",
     "get-youtube-id": "^1.0.1",
+    "groq": "^2.13.0",
     "next": "latest",
     "next-sanity": "^0.2.0",
     "react": "^17.0.2",

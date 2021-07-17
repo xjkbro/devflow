@@ -1,12 +1,17 @@
 import "tailwindcss/tailwind.css";
-import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
 import "../styles/globals.css";
 
+const theme = {
+    colors: {
+        primary: "#333",
+    },
+};
 function MyApp({ Component, pageProps }) {
     return (
-        // <Container>
-        <Component {...pageProps} />
-        // </Container>
+        <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+        </ThemeProvider>
     );
 }
 

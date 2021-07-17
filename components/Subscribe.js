@@ -1,5 +1,42 @@
 import styles from "../styles/Subscribe.module.css";
+import styled from "styled-components";
 import React, { useRef, useState } from "react";
+
+const SubscribeForm = styled.form`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 50.5%;
+    text-align: center;
+    > input {
+        height: 50px;
+        width: 500px;
+        color: #061922;
+        padding: 0 10px;
+        outline: none;
+    }
+    > button {
+        background-color: #061922;
+        padding: 15px;
+    }
+    @media (max-width: 1000px) {
+        > input {
+            width: 400px;
+        }
+    }
+    @media (max-width: 450px) {
+        padding-top: 45.5%;
+        font-size: 0.5rem;
+        > input {
+            height: 30px;
+            width: 300px;
+        }
+        > button {
+            padding: 10px;
+        }
+    }
+`;
 
 export default function Subscribe() {
     // 1. Create a reference to the input so we can fetch/clear it's value.
@@ -33,7 +70,8 @@ export default function Subscribe() {
     };
 
     return (
-        <form onSubmit={subscribe} className={styles.subscribe}>
+        // <form onSubmit={subscribe} className={styles.subscribe}>
+        <SubscribeForm onSubmit={subscribe}>
             <div>{message ? message : ``}</div>
             <input
                 id="email-input"
@@ -44,6 +82,6 @@ export default function Subscribe() {
                 type="email"
             />
             <button type="submit">Subscribe</button>
-        </form>
+        </SubscribeForm>
     );
 }
