@@ -14,7 +14,7 @@ export default function Home() {
             <NavBar />
             <Hero />
 
-            <div className={styles.horizontalLine} />
+            <Line />
             <Footer />
         </Container>
     );

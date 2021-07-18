@@ -118,11 +118,6 @@ export default function NavBar() {
     );
     return (
         <header>
-            <Head>
-                <title>DevFlow</title>
-                <link rel="icon" href="/favicon.ico" />
-                {/* <script src="https://apis.google.com/js/platform.js"></script> */}
-            </Head>
             <div className={styles.mobileContainer}>
                 <Image
                     src="/images/DevFlow Logo - White.png"

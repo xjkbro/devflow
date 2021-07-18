@@ -7,7 +7,7 @@ const SubscribeForm = styled.form`
     top: 0;
     left: 0;
     width: 100%;
-    padding-top: 50.5%;
+    padding-top: 41%;
     text-align: center;
     > input {
         height: 50px;
@@ -18,7 +18,7 @@ const SubscribeForm = styled.form`
     }
     > button {
         background-color: #061922;
-        padding: 15px;
+        padding: 14px;
     }
     @media (max-width: 1000px) {
         > input {
@@ -72,7 +72,7 @@ export default function Subscribe() {
     return (
         // <form onSubmit={subscribe} className={styles.subscribe}>
         <SubscribeForm onSubmit={subscribe}>
-            <div>{message ? message : ``}</div>
+            <div>{message ? message : `Subscribe to my newsletter`}</div>
             <input
                 id="email-input"
                 name="email"
