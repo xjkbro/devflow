@@ -45,38 +45,48 @@ const useStyles = makeStyles({
         color: "white",
     },
 });
+const baseUrl =
+    "https://d6vys1oo.api.sanity.io/v2021-06-07/data/query/production?query=";
+// const q = groq`count(*[_type == "post"  && category->title == "Programming"])`;
+const fetcher = async (url) => {
+    return await fetch(url).then((result) => result.json());
+};
 export default function Programming() {
     const maxPosts = 6;
     const router = useRouter();
     let page = parseInt(router.query.page);
     if (!page) page = 1;
     console.log(page);
-    const getNumberOfPosts = useSWR(
-        groq`count(*[_type == "post"  && category->title == "Programming"])`,
-        (query) => sanityClient.fetch(query)
-    );
-    const totalPosts = getNumberOfPosts.data;
-    console.log(totalPosts);
-    const getArticlesQuery = groq`
-    *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
-        page,
-        maxPosts
-    )}] {
-        title,
-        _id,
-        slug,
-        author->{name, _id, slug,image, bio},
-        mainImage,
-        category->{title,_id,description},
-        publishedAt,
-        body,
-    } 
-    `;
-    const getPosts = useSWR(getArticlesQuery, (query) =>
-        sanityClient.fetch(query)
-    );
-    const posts = getPosts.data;
 
+    const totalUrl =
+        baseUrl +
+        encodeURIComponent(
+            `count(*[_type == "post"  && category->title == "Programming"])`
+        );
+    const { data: getNumberOfPosts, error } = useSWR(totalUrl, fetcher);
+    const totalPosts = getNumberOfPosts?.result;
+    console.log(totalPosts);
+
+    const articleUrl =
+        baseUrl +
+        encodeURIComponent(
+            `*[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
+                page,
+                maxPosts
+            )}] {
+            title,
+            _id,
+            slug,
+            author->{name, _id, slug,image, bio},
+            mainImage,
+            category->{title,_id,description},
+            publishedAt,
+            body,
+        } `
+        );
+    const { data: getPosts } = useSWR(articleUrl, fetcher);
+    const posts = getPosts?.result;
+    console.log(getPosts);
     const classes = useStyles();
     if (!posts) return <Loading />;
     if (!posts) return <Loading />;
