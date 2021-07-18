@@ -4,10 +4,14 @@ import sanityClient from "../utils/client";
 import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import styles from "../styles/Contact.module.css";
+import Head from "next/head";
 
 export default function Contact() {
     return (
         <div className={styles.container}>
+            <Head>
+                <title>Contact | DevFlow</title>
+            </Head>
             <NavBar />
             <div className={styles.halves}>
                 <div className={styles.email}>

@@ -24,6 +24,7 @@ import sanityQuery, {
     getPostsQuery,
     getTotalPostsQuery,
 } from "../lib/sanityQuery";
+import Head from "next/head";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -64,6 +65,9 @@ export default function Aquatics() {
     const lastPage = Math.ceil(totalPosts / maxPosts);
     return (
         <div>
+            <Head>
+                <title>Aquatics | DevFlow</title>
+            </Head>
             <NavBar />
             <div className={styles.bigTitle}>Aquatics</div>
             <div className={styles.smallTitle}>

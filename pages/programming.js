@@ -24,6 +24,7 @@ import sanityQuery, {
     getPostsQuery,
     getTotalPostsQuery,
 } from "../lib/sanityQuery";
+import Head from "next/head";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -65,6 +66,9 @@ export default function Programming() {
     console.log(posts);
     return (
         <div>
+            <Head>
+                <title>Programming | DevFlow</title>
+            </Head>
             <NavBar />
             <div className={styles.bigTitle}>Programming</div>
             <div className={styles.smallTitle}>

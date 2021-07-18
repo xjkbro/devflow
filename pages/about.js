@@ -9,6 +9,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import styles from "../styles/About.module.css";
 import sanityQuery, { getAboutQuery } from "../lib/sanityQuery";
 import styled from "styled-components";
+import Head from "next/head";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -112,6 +113,9 @@ export default function Abouts() {
     if (!aboutPosts) return <Loading />;
     return (
         <div>
+            <Head>
+                <title>About | DevFlow</title>
+            </Head>
             <NavBar />
             {!aboutPosts ? <Loading /> : <></>}
             {aboutPosts.map((item) => (

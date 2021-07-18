@@ -8,6 +8,7 @@ import Error from "../error";
 import styles from "../../styles/Article.module.css";
 import imageUrlBuilder from "@sanity/image-url";
 import ViewCounter from "../../components/ViewCounter";
+import Head from "next/head";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -18,6 +19,9 @@ export default function SinglePage({ article }) {
     if (!article) return <Error />;
     return (
         <div>
+            <Head>
+                <title>{article.title} | DevFlow</title>
+            </Head>
             <NavBar />
             <img className={styles.image} src={urlFor(article.mainImage)} />
             <div className={styles.title}>{article.title}</div>

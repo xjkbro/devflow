@@ -4,6 +4,9 @@ import Footer from "../components/Footer";
 export default function Error() {
     return (
         <div>
+            <Head>
+                <title>Error | DevFlow</title>
+            </Head>
             <NavBar />
             <div
                 style={{
