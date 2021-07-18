@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 export default function Programming() {
     const maxPosts = 6;
     const router = useRouter();
-    let page = router.query.page;
+    let page = parseInt(router.query.page);
     if (!page) page = 1;
     console.log(page);
     const getNumberOfPosts = useSWR(
@@ -77,7 +77,9 @@ export default function Programming() {
     const posts = getPosts.data;
 
     const classes = useStyles();
-    // if (!posts) return <Loading />;
+    if (!posts) return <Loading />;
+    if (!posts) return <Loading />;
+
     const lastPage = Math.ceil(totalPosts / maxPosts);
     console.log(posts);
     return (
@@ -89,69 +91,64 @@ export default function Programming() {
             </div>
             <div className={styles.smallTitle}>{totalPosts} posts</div>
             <div className={styles.container}>
-                {!posts ? (
+                {/* {!posts ? (
                     <Loading />
-                ) : (
-                    posts.map((item) => {
-                        let date = new Date(item.publishedAt);
-                        let itemDate =
-                            date.getMonth() +
-                            1 +
-                            "-" +
-                            date.getDate() +
-                            "-" +
-                            date.getFullYear();
-                        console.log(item.slug.current);
-                        return (
-                            <div className={styles.itemContainer}>
-                                <Link
-                                    href={`/programming/${item.slug.current}`}
-                                >
-                                    <Card className={classes.root}>
-                                        <CardActionArea>
-                                            <CardMedia
-                                                className={classes.card}
-                                                image={urlFor(item.mainImage)}
-                                                title={item.title}
-                                            />
-                                            <Box
-                                                py={3}
-                                                px={2}
-                                                className={classes.content}
-                                            >
-                                                <Info
-                                                    className={classes.titles}
+                ) : ( */}
+                {posts.map((item) => {
+                    let date = new Date(item.publishedAt);
+                    let itemDate =
+                        date.getMonth() +
+                        1 +
+                        "-" +
+                        date.getDate() +
+                        "-" +
+                        date.getFullYear();
+                    console.log(item.slug.current);
+                    return (
+                        <div className={styles.itemContainer}>
+                            <Link href={`/programming/${item.slug.current}`}>
+                                <Card className={classes.root}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.card}
+                                            image={urlFor(item.mainImage)}
+                                            title={item.title}
+                                        />
+                                        <Box
+                                            py={3}
+                                            px={2}
+                                            className={classes.content}
+                                        >
+                                            <Info className={classes.titles}>
+                                                <InfoSubtitle
+                                                    style={{
+                                                        fontSize: "12px",
+                                                    }}
                                                 >
-                                                    <InfoSubtitle
-                                                        style={{
-                                                            fontSize: "12px",
-                                                        }}
-                                                    >
-                                                        {/* {itemDate} */}
-                                                        <ViewCounter
-                                                            view={false}
-                                                            slug={`${item.slug.current}`}
-                                                        />
-                                                    </InfoSubtitle>
-                                                    <InfoTitle>
-                                                        {item.title}
-                                                    </InfoTitle>
-                                                    <InfoCaption>
-                                                        {item.body[0].children[0].text.substring(
-                                                            0,
-                                                            25
-                                                        )}
-                                                        ...
-                                                    </InfoCaption>
-                                                </Info>
-                                            </Box>
-                                        </CardActionArea>
-                                    </Card>
-                                </Link>
-                            </div>
-                        );
-                    })
-                )}
+                                                    {/* {itemDate} */}
+                                                    <ViewCounter
+                                                        view={false}
+                                                        slug={`${item.slug.current}`}
+                                                    />
+                                                </InfoSubtitle>
+                                                <InfoTitle>
+                                                    {item.title}
+                                                </InfoTitle>
+                                                <InfoCaption>
+                                                    {item.body[0].children[0].text.substring(
+                                                        0,
+                                                        25
+                                                    )}
+                                                    ...
+                                                </InfoCaption>
+                                            </Info>
+                                        </Box>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
 
             <div className={styles.pagination}>

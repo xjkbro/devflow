@@ -1,20 +1,21 @@
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import styled from "styled-components";
 
 export default function Loading() {
     let [loading, setLoading] = useState(true);
     let [color, setColor] = useState("#ffffff");
     return (
-        <div
-            styles={{
-                height: "50vh",
-                margin: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
+        <Container>
             <ClipLoader color={color} loading={loading} size={150} />
-        </div>
+        </Container>
     );
 }
+const Container = styled.div`
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
