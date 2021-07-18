@@ -12,10 +12,11 @@ export default function Loading() {
     );
 }
 const Container = styled.div`
-    height: 100%;
-    width: 100vw;
+    /* height: 100%; */
+    margin-top: 50px;
+    width: 100%;
     margin: auto;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
 `;

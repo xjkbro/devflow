@@ -71,70 +71,63 @@ export default function Programming() {
                 {page} of {lastPage}
             </div>
             <div className={styles.smallTitle}>{totalPosts} posts</div>
+            {!posts ? <Loading /> : <></>}
             <div className={styles.container}>
-                {!posts ? (
-                    <Loading />
-                ) : (
-                    posts.map((item) => {
-                        let date = new Date(item.publishedAt);
-                        let itemDate =
-                            date.getMonth() +
-                            1 +
-                            "-" +
-                            date.getDate() +
-                            "-" +
-                            date.getFullYear();
-                        console.log(item.slug.current);
-                        return (
-                            <div className={styles.itemContainer}>
-                                <Link
-                                    href={`/programming/${item.slug.current}`}
-                                >
-                                    <Card className={classes.root}>
-                                        <CardActionArea>
-                                            <CardMedia
-                                                className={classes.card}
-                                                image={urlFor(item.mainImage)}
-                                                title={item.title}
-                                            />
-                                            <Box
-                                                py={3}
-                                                px={2}
-                                                className={classes.content}
-                                            >
-                                                <Info
-                                                    className={classes.titles}
+                {posts?.map((item) => {
+                    let date = new Date(item.publishedAt);
+                    let itemDate =
+                        date.getMonth() +
+                        1 +
+                        "-" +
+                        date.getDate() +
+                        "-" +
+                        date.getFullYear();
+                    console.log(item.slug.current);
+                    return (
+                        <div className={styles.itemContainer}>
+                            <Link href={`/programming/${item.slug.current}`}>
+                                <Card className={classes.root}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.card}
+                                            image={urlFor(item.mainImage)}
+                                            title={item.title}
+                                        />
+                                        <Box
+                                            py={3}
+                                            px={2}
+                                            className={classes.content}
+                                        >
+                                            <Info className={classes.titles}>
+                                                <InfoSubtitle
+                                                    style={{
+                                                        fontSize: "12px",
+                                                    }}
                                                 >
-                                                    <InfoSubtitle
-                                                        style={{
-                                                            fontSize: "12px",
-                                                        }}
-                                                    >
-                                                        {/* {itemDate} */}
-                                                        <ViewCounter
-                                                            view={false}
-                                                            slug={`${item.slug.current}`}
-                                                        />
-                                                    </InfoSubtitle>
-                                                    <InfoTitle>
-                                                        {item.title}
-                                                    </InfoTitle>
-                                                    <InfoCaption>
-                                                        {item.body[0].children[0].text.substring(
-                                                            0,
-                                                            25
-                                                        )}
-                                                        ...
-                                                    </InfoCaption>
-                                                </Info>
-                                            </Box>
-                                        </CardActionArea>
-                                    </Card>
-                                </Link>
-                            </div>
-                        );
-                    })
-                )}
+                                                    {/* {itemDate} */}
+                                                    <ViewCounter
+                                                        view={false}
+                                                        slug={`${item.slug.current}`}
+                                                    />
+                                                </InfoSubtitle>
+                                                <InfoTitle>
+                                                    {item.title}
+                                                </InfoTitle>
+                                                <InfoCaption>
+                                                    {item.body[0].children[0].text.substring(
+                                                        0,
+                                                        25
+                                                    )}
+                                                    ...
+                                                </InfoCaption>
+                                            </Info>
+                                        </Box>
+                                    </CardActionArea>
+                                </Card>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
 
             <div className={styles.pagination}>
