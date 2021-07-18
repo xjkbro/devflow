@@ -89,7 +89,6 @@ export default function Programming() {
     console.log(getPosts);
     const classes = useStyles();
     if (!posts) return <Loading />;
-    if (!posts) return <Loading />;
 
     const lastPage = Math.ceil(totalPosts / maxPosts);
     console.log(posts);
@@ -105,7 +104,7 @@ export default function Programming() {
                 {/* {!posts ? (
                     <Loading />
                 ) : ( */}
-                {posts.map((item) => {
+                {posts?.map((item) => {
                     let date = new Date(item.publishedAt);
                     let itemDate =
                         date.getMonth() +
