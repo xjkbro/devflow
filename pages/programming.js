@@ -20,8 +20,10 @@ import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
 import { ArticlePagination } from "../utils/ArticlePagination";
 import ViewCounter from "../components/ViewCounter";
-import useSWR from "swr";
-import groq from "groq";
+import sanityQuery, {
+    getPostsQuery,
+    getTotalPostsQuery,
+} from "../lib/sanityQuery";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -51,34 +53,14 @@ export default function Programming() {
     let page = parseInt(router.query.page);
     if (!page) page = 1;
     console.log(page);
-    const getNumberOfPosts = useSWR(
-        groq`count(*[_type == "post"  && category->title == "Programming"])`,
-        (query) => sanityClient.fetch(query)
+    const { result: totalPosts, error: totalPostsError } = sanityQuery(
+        getTotalPostsQuery("Programming")
     );
-    const totalPosts = getNumberOfPosts.data;
     console.log(totalPosts);
-
-    const getPosts = useSWR(
-        groq`
-    *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
-        page,
-        maxPosts
-    )}] {
-        title,
-        _id,
-        slug,
-        author->{name, _id, slug,image, bio},
-        mainImage,
-        category->{title,_id,description},
-        publishedAt,
-        body,
-    } `,
-        (query) => sanityClient.fetch(query)
+    const { result: posts, error: postsError } = sanityQuery(
+        getPostsQuery("Programming", page, maxPosts)
     );
-    const posts = getPosts.data;
-
     const classes = useStyles();
-
     const lastPage = Math.ceil(totalPosts / maxPosts);
     console.log(posts);
     return (
