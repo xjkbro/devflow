@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Head from "next/head";
 
 export default function Error() {
     return (
