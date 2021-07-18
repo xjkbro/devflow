@@ -56,23 +56,24 @@ export default function Programming() {
         (query) => sanityClient.fetch(query)
     );
     const totalPosts = getNumberOfPosts.data;
-    const getPosts = useSWR(
-        groq`
-        *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
-            page,
-            maxPosts
-        )}] {
-            title,
-            _id,
-            slug,
-            author->{name, _id, slug,image, bio},
-            mainImage,
-            category->{title,_id,description},
-            publishedAt,
-            body,
-        } 
-        `,
-        (query) => sanityClient.fetch(query)
+    console.log(totalPosts);
+    const getArticlesQuery = groq`
+    *[_type == "post"  && category->title == "Programming"] | order(publishedAt desc) [${ArticlePagination(
+        page,
+        maxPosts
+    )}] {
+        title,
+        _id,
+        slug,
+        author->{name, _id, slug,image, bio},
+        mainImage,
+        category->{title,_id,description},
+        publishedAt,
+        body,
+    } 
+    `;
+    const getPosts = useSWR(getArticlesQuery, (query) =>
+        sanityClient.fetch(query)
     );
     const posts = getPosts.data;
 
