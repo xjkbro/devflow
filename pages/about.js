@@ -10,6 +10,7 @@ import styles from "../styles/About.module.css";
 import sanityQuery, { getAboutQuery } from "../lib/sanityQuery";
 import styled from "styled-components";
 import Head from "next/head";
+import Layout from "../components/Layout";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -112,37 +113,36 @@ export default function Abouts() {
 
     if (!aboutPosts) return <Loading />;
     return (
-        <div>
-            <Head>
-                <title>About | DevFlow</title>
-            </Head>
-            <NavBar />
-            {!aboutPosts ? <Loading /> : <></>}
-            {aboutPosts.map((item) => (
-                <>
-                    <ItemContainer key={item._id}>
-                        <Image
-                            className={styles.image}
-                            src={urlFor(item.image)}
-                        />
-
-                        <TextContainer>
-                            <h1>{item.name}</h1>
-                            <h3>{item.role}</h3>
-                            <BlockContent
-                                blocks={item.bio}
-                                serializers={serializers}
-                                projectId="d6vys1oo"
-                                dataset="production"
-                                className="textBody"
+        <Layout>
+            <div>
+                <NavBar />
+                {!aboutPosts ? <Loading /> : <></>}
+                {aboutPosts.map((item) => (
+                    <>
+                        <ItemContainer key={item._id}>
+                            <Image
+                                className={styles.image}
+                                src={urlFor(item.image)}
                             />
-                        </TextContainer>
-                    </ItemContainer>
-                    <Line />
-                </>
-            ))}
-            <Footer />
-        </div>
+
+                            <TextContainer>
+                                <h1>{item.name}</h1>
+                                <h3>{item.role}</h3>
+                                <BlockContent
+                                    blocks={item.bio}
+                                    serializers={serializers}
+                                    projectId="d6vys1oo"
+                                    dataset="production"
+                                    className="textBody"
+                                />
+                            </TextContainer>
+                        </ItemContainer>
+                        <Line />
+                    </>
+                ))}
+                <Footer />
+            </div>
+        </Layout>
     );
 }
 // export const getServerSideProps = async ({}) => {

@@ -90,15 +90,9 @@ export default function Hero() {
     return (
         <Container>
             <ImageDiv />
-            {/* <img className={styles.heroImage} src="hero.jpg" /> */}
             <Title>One life. No Regrets.</Title>
             <SubTitle>Make the best of it.</SubTitle>
-
             <Subscribe />
-            {/* <div className={styles.subscribe}>
-                <input type="text" placeholder="EMAIL" />
-                <button>SUBSCRIBE</button>
-            </div> */}
         </Container>
     );
 }

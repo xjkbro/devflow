@@ -6,6 +6,7 @@ import { SocialIcon } from "react-social-icons";
 import styles from "../styles/Contact.module.css";
 import styled from "styled-components";
 import Head from "next/head";
+import Layout from "../components/Layout";
 
 const Halves = styled.div`
     height: 300px;
@@ -156,72 +157,71 @@ const ListItem = styled.div`
 
 export default function Contact() {
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Contact | DevFlow</title>
-            </Head>
-            <NavBar />
-            <Halves>
-                <Email>
-                    <h1>Contact</h1>
-                    <p>
-                        Feel Free to contact this email for any business
-                        inqueries.
-                    </p>
-                    <h5>
-                        <strong>Email:</strong> jkdelara@thedevflow.com
-                    </h5>
-                </Email>
-                <Sponsors>
-                    <h1>Sponsors</h1>
-                    <p>
-                        If you are interested in sponsoring DevFlow videos,
-                        please email us for pricing and terms
-                    </p>
-                </Sponsors>
-            </Halves>
-            <Follow>
-                <p>Follow me on these platforms</p>
-                <ul>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://twitter.com/thedevflow"
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://facebook.com/thedevflow"
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://instagram.com/thedevflow"
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw"
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://linkedin.com/jkdelara"
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <SocialIcon
-                            bgColor="#fff"
-                            url="https://github.com/xjkbro"
-                        />
-                    </ListItem>
-                </ul>
-            </Follow>
-            <Footer />
-        </div>
+        <Layout>
+            <div className={styles.container}>
+                <NavBar />
+                <Halves>
+                    <Email>
+                        <h1>Contact</h1>
+                        <p>
+                            Feel Free to contact this email for any business
+                            inqueries.
+                        </p>
+                        <h5>
+                            <strong>Email:</strong> jkdelara@thedevflow.com
+                        </h5>
+                    </Email>
+                    <Sponsors>
+                        <h1>Sponsors</h1>
+                        <p>
+                            If you are interested in sponsoring DevFlow videos,
+                            please email us for pricing and terms
+                        </p>
+                    </Sponsors>
+                </Halves>
+                <Follow>
+                    <p>Follow me on these platforms</p>
+                    <ul>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://twitter.com/thedevflow"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://facebook.com/thedevflow"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://instagram.com/thedevflow"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://linkedin.com/jkdelara"
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <SocialIcon
+                                bgColor="#fff"
+                                url="https://github.com/xjkbro"
+                            />
+                        </ListItem>
+                    </ul>
+                </Follow>
+                <Footer />
+            </div>
+        </Layout>
     );
 }

@@ -9,6 +9,7 @@ import styles from "../../styles/Article.module.css";
 import imageUrlBuilder from "@sanity/image-url";
 import ViewCounter from "../../components/ViewCounter";
 import Head from "next/head";
+import Layout from "../../components/Layout";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -18,26 +19,25 @@ function urlFor(source) {
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     return (
-        <div>
-            <Head>
-                <title>{article.title} | DevFlow</title>
-            </Head>
-            <NavBar />
-            <img className={styles.image} src={urlFor(article.mainImage)} />
-            <div className={styles.title}>{article.title}</div>
-            <div className={styles.author}>by: {article.name}</div>
-            <ViewCounter view={true} slug={`${article.slug.current}`} />
-            <div className={styles.body}>
-                <BlockContent
-                    blocks={article.body}
-                    serializers={serializers}
-                    projectId="d6vys1oo"
-                    dataset="production"
-                />
+        <Layout article={article}>
+            <div>
+                <NavBar />
+                <img className={styles.image} src={urlFor(article.mainImage)} />
+                <div className={styles.title}>{article.title}</div>
+                <div className={styles.author}>by: {article.name}</div>
+                <ViewCounter view={true} slug={`${article.slug.current}`} />
+                <div className={styles.body}>
+                    <BlockContent
+                        blocks={article.body}
+                        serializers={serializers}
+                        projectId="d6vys1oo"
+                        dataset="production"
+                    />
+                </div>
+                <div className={styles.horizontalLine} />
+                <Footer />
             </div>
-            <div className={styles.horizontalLine} />
-            <Footer />
-        </div>
+        </Layout>
     );
 }
 

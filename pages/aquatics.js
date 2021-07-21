@@ -24,7 +24,7 @@ import sanityQuery, {
     getPostsQuery,
     getTotalPostsQuery,
 } from "../lib/sanityQuery";
-import Head from "next/head";
+import Layout from "../components/Layout";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -64,92 +64,100 @@ export default function Aquatics() {
     const classes = useStyles();
     const lastPage = Math.ceil(totalPosts / maxPosts);
     return (
-        <div>
-            <Head>
-                <title>Aquatics | DevFlow</title>
-            </Head>
-            <NavBar />
-            <div className={styles.bigTitle}>Aquatics</div>
-            <div className={styles.smallTitle}>
-                {page} of {lastPage}
-            </div>
-            <div className={styles.smallTitle}>{totalPosts} posts</div>
-            {!posts ? <Loading /> : <></>}
+        <Layout>
+            <div>
+                <NavBar />
+                <div className={styles.bigTitle}>Aquatics</div>
+                <div className={styles.smallTitle}>
+                    {page} of {lastPage}
+                </div>
+                <div className={styles.smallTitle}>{totalPosts} posts</div>
+                {!posts ? <Loading /> : <></>}
 
-            <div className={styles.container}>
-                {posts?.map((item) => {
-                    let date = new Date(item.publishedAt);
-                    let itemDate =
-                        date.getMonth() +
-                        1 +
-                        "-" +
-                        date.getDate() +
-                        "-" +
-                        date.getFullYear();
-                    return (
-                        <div className={styles.itemContainer}>
-                            <Link href={`/aquatics/${item.slug.current}`}>
-                                <Card className={classes.root}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            className={classes.card}
-                                            image={urlFor(item.mainImage)}
-                                            title={item.title}
-                                        />
-                                        <Box
-                                            py={3}
-                                            px={2}
-                                            className={classes.content}
-                                        >
-                                            <Info className={classes.titles}>
-                                                <InfoSubtitle
-                                                    style={{
-                                                        fontSize: "12px",
-                                                    }}
+                <div className={styles.container}>
+                    {posts?.map((item) => {
+                        let date = new Date(item.publishedAt);
+                        let itemDate =
+                            date.getMonth() +
+                            1 +
+                            "-" +
+                            date.getDate() +
+                            "-" +
+                            date.getFullYear();
+                        return (
+                            <div
+                                className={styles.itemContainer}
+                                key={item.slug.current}
+                            >
+                                <Link href={`/aquatics/${item.slug.current}`}>
+                                    <Card className={classes.root}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                className={classes.card}
+                                                image={urlFor(item.mainImage)}
+                                                title={item.title}
+                                            />
+                                            <Box
+                                                py={3}
+                                                px={2}
+                                                className={classes.content}
+                                            >
+                                                <Info
+                                                    className={classes.titles}
                                                 >
-                                                    {/* {itemDate} */}
-                                                    <ViewCounter
-                                                        view={false}
-                                                        slug={`${item.slug.current}`}
-                                                    />
-                                                </InfoSubtitle>
-                                                <InfoTitle>
-                                                    {item.title}
-                                                </InfoTitle>
-                                                <InfoCaption>
-                                                    {item.body[0].children[0].text.substring(
-                                                        0,
-                                                        25
-                                                    )}
-                                                    ...
-                                                </InfoCaption>
-                                            </Info>
-                                        </Box>
-                                    </CardActionArea>
-                                </Card>
-                            </Link>
-                        </div>
-                    );
-                })}
+                                                    <InfoSubtitle
+                                                        style={{
+                                                            fontSize: "12px",
+                                                        }}
+                                                    >
+                                                        {/* {itemDate} */}
+                                                        <ViewCounter
+                                                            view={false}
+                                                            slug={`${item.slug.current}`}
+                                                        />
+                                                    </InfoSubtitle>
+                                                    <InfoTitle>
+                                                        {item.title}
+                                                    </InfoTitle>
+                                                    <InfoCaption>
+                                                        {item.body[0].children[0].text.substring(
+                                                            0,
+                                                            25
+                                                        )}
+                                                        ...
+                                                    </InfoCaption>
+                                                </Info>
+                                            </Box>
+                                        </CardActionArea>
+                                    </Card>
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className={styles.pagination}>
+                    <Button
+                        className={styles.previous}
+                        onClick={() =>
+                            router.push(`/aquatics?page=${page - 1}`)
+                        }
+                        disabled={page <= 1}
+                    >
+                        Previous
+                    </Button>
+                    <Button
+                        className={classes.button}
+                        onClick={() =>
+                            router.push(`/aquatics?page=${page + 1}`)
+                        }
+                        disabled={page == lastPage}
+                    >
+                        Next
+                    </Button>
+                </div>
+                <div className={styles.horizontalLine} />
+                <Footer />
             </div>
-            <div className={styles.pagination}>
-                <Button
-                    className={styles.previous}
-                    onClick={() => router.push(`/aquatics?page=${page - 1}`)}
-                    disabled={page <= 1}
-                >
-                    Previous
-                </Button>
-                <Button
-                    className={classes.button}
-                    onClick={() => router.push(`/aquatics?page=${page + 1}`)}
-                    disabled={page == lastPage}
-                >
-                    Next
-                </Button>
-            </div>
-            <div className={styles.horizontalLine} />
-            <Footer />
-        </div>
+        </Layout>
     );
 }
