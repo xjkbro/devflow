@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 export default function Layout({ article, children }) {
     const router = useRouter();
+
     function capitalizeTheFirstLetterOfEachWord(words) {
         var separateWord = words.toLowerCase().split(" ");
         for (var i = 0; i < separateWord.length; i++) {
@@ -14,6 +15,29 @@ export default function Layout({ article, children }) {
     }
     const findPage = () => {
         console.log(router);
+        let capitalize = "";
+        if (
+            router.pathname == "/programming/[slug]" ||
+            router.pathname == "/lifting/[slug]" ||
+            router.pathname == "/aquatics/[slug]"
+        ) {
+            // console.log("hello");
+            let slug = router.query.slug;
+            let num = 0;
+            for (let i = 0; i < slug.length - 1; i++) {
+                if (slug[i] == "-") num++;
+            }
+            // console.log(num);
+            let newSlug = slug;
+            for (let i = 0; i < num; i++) {
+                newSlug = newSlug.replace("-", " ");
+                console.log(newSlug);
+            }
+            // console.log(newSlug);
+            capitalize = capitalizeTheFirstLetterOfEachWord(newSlug) + " | ";
+            // console.log(capitalize);
+        }
+
         switch (router.pathname) {
             case "/":
                 return "";
@@ -32,8 +56,8 @@ export default function Layout({ article, children }) {
             case "/programming/[slug]":
             case "/lifting/[slug]":
             case "/aquatics/[slug]":
-                return article.title + " | ";
-
+                // console.log(capitalize);
+                return capitalize;
             default:
                 return "";
             // code block
@@ -46,8 +70,8 @@ export default function Layout({ article, children }) {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                {/* <title>{findPage()}DevFlow</title> */}
-                <title>DevFlow</title>
+                <title>{findPage()}DevFlow</title>
+                {/* <title>DevFlow</title> */}
                 <meta charset="UTF-8" />
                 <meta
                     name="description"
