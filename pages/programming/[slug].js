@@ -19,7 +19,8 @@ function urlFor(source) {
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     return (
-        <Layout article={article}>
+        // <Layout article={article}>
+        <Layout>
             <div>
                 <NavBar />
                 <img className={styles.image} src={urlFor(article.mainImage)} />

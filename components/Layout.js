@@ -46,7 +46,8 @@ export default function Layout({ article, children }) {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <title>{findPage()}DevFlow</title>
+                {/* <title>{findPage()}DevFlow</title> */}
+                <title>DevFlow</title>
                 <meta charset="UTF-8" />
                 <meta
                     name="description"

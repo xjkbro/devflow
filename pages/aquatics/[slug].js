@@ -13,7 +13,8 @@ import Head from "next/head";
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     return (
-        <Layout article={article}>
+        // <Layout article={article}>
+        <Layout>
             <div>
                 <NavBar />
                 <Head>
