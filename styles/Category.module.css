@@ -31,14 +31,19 @@
     height: 100%;
     /* padding controls height, will always be perfectly square regardless of width */
     position: relative;
-    opacity: 0.8;
+    opacity: 1;
     transition: all 150ms ease-in;
 }
 .itemContainer:hover {
     /* transform: scale(1.005); */
-    opacity: 1;
+    opacity: 0.8;
     box-shadow: 0px 5px 5px #111;
 }
+.itemContainer div {
+    text-shadow: -1px 1px 2px rgb(53, 53, 53), 1px 1px 2px rgb(53, 53, 53),
+        1px -1px 0 rgb(53, 53, 53), -1px -1px 0 rgb(53, 53, 53);
+}
+
 .itemContainer > .MuiPaper-root {
     background-color: black;
 }

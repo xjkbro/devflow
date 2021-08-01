@@ -18,15 +18,28 @@
     text-transform: full-width;
 }
 .body {
-    margin: 1rem 0;
+    margin: 1rem;
     font-size: 1rem;
     font-weight: 300;
+}
+.body p {
+    margin: 1rem 0;
 }
 .body iframe {
     margin: 0 auto;
     padding: 20px 0;
     width: 90%;
 }
+.body h1,
+.body h2,
+.body h3,
+.body h4,
+.body h5,
+.body h6 {
+    font-size: revert;
+    font-weight: revert;
+}
+
 .body > div > ul {
     padding-left: 1.5rem;
 }

@@ -21,7 +21,7 @@ const Container = styled.div`
     @media (max-width: 700px) {
         min-height: 500px;
     }
-    @media (max-width: 1400px) {
+    @media (max-width: 450px) {
         min-height: 300px;
     }
 `;
