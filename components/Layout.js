@@ -17,9 +17,10 @@ export default function Layout({ article, children }) {
         console.log(router);
         let capitalize = "";
         if (
-            router.pathname == "/programming/[slug]" ||
-            router.pathname == "/lifting/[slug]" ||
-            router.pathname == "/aquatics/[slug]"
+            (router.pathname == "/programming/[slug]" ||
+                router.pathname == "/lifting/[slug]" ||
+                router.pathname == "/aquatics/[slug]") &&
+            router.query.slug
         ) {
             // console.log("hello");
             let slug = router.query.slug;
