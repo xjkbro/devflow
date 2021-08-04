@@ -9,9 +9,11 @@ import styles from "../../styles/Article.module.css";
 import ViewCounter from "../../components/ViewCounter";
 import Layout from "../../components/Layout";
 import Head from "next/head";
+import { parseISOString, isoFormatDMY } from "../../utils/Date";
 
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
+    const date = parseISOString(article.publishedAt);
     return (
         // <Layout article={article}>
         <Layout>
@@ -23,7 +25,10 @@ export default function SinglePage({ article }) {
                 <img className={styles.image} src={urlFor(article.mainImage)} />
                 <div className={styles.title}>{article.title}</div>
                 <div className={styles.author}>by: {article.name}</div>
-                <ViewCounter view={true} slug={`${article.slug.current}`} />
+                <div>
+                    {"Published: " + isoFormatDMY(date) + " - "}
+                    <ViewCounter view={true} slug={`${article.slug.current}`} />
+                </div>
                 <div className={styles.body}>
                     <BlockContent
                         blocks={article.body}
@@ -53,6 +58,7 @@ export async function getStaticProps({ params }) {
             }
         },
         body,
+        publishedAt,
         "name": author->name,
     }
     `

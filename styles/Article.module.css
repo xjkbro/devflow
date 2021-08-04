@@ -19,8 +19,9 @@
 }
 .body {
     margin: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    line-height: 2.2rem;
 }
 .body p {
     margin: 1rem 0;
@@ -29,6 +30,10 @@
     margin: 0 auto;
     padding: 20px 0;
     width: 90%;
+}
+.body img {
+    margin: 14px auto;
+    width: 75%;
 }
 .body h1,
 .body h2,
