@@ -81,12 +81,40 @@
 }
 .body div > pre {
     margin: 5vh auto;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 10px;
-    box-shadow: 2px 2px 7px black;
+    border: 1px solid rgb(228, 228, 228);
+    /* padding: 10px; */
+    box-shadow: 2px 2px 4px black;
+    border-radius: 5px;
     width: 75%;
+    background-color: rgba(19, 19, 19, 0.7);
 }
-
+.body div > pre > ul {
+    background: linear-gradient(rgb(228, 228, 228), rgb(221, 221, 221));
+    /* background-color: rgb(228, 228, 228); */
+    height: 40px;
+    display: flex;
+}
+.body div > pre > ul > li {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 10px 5px;
+    border: 1px solid rgba(172, 172, 172, 0.5);
+}
+.body div > pre > ul > li:nth-child(1) {
+    margin-left: 10px;
+    background-color: #f5262b;
+}
+.body div > pre > ul > li:nth-child(2) {
+    background-color: #f0c900;
+}
+.body div > pre > ul > li:nth-child(3) {
+    background-color: #38f726;
+}
+.body div > pre > div {
+    padding: 20px 25px;
+    color: rgb(170, 245, 255);
+}
 @media screen and (max-width: 800px) {
     .body iframe {
         width: 95%;

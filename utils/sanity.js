@@ -42,7 +42,14 @@ export const serializers = {
         code: ({ node }) => {
             return (
                 <pre>
-                    <code>{node.code}</code>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <div>
+                        <code>{node.code}</code>
+                    </div>
                 </pre>
             );
         },
