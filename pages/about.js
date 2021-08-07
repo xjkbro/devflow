@@ -69,7 +69,7 @@ const TextContainer = styled.div`
 `;
 const Line = styled.div`
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    width: 75vw;
+    width: 100%;
     margin: 30px auto 30px auto;
 `;
 const Image = styled.img`
@@ -87,7 +87,12 @@ const Image = styled.img`
         border-radius: 10px;
     }
 `;
-
+const MainSection = styled.div`
+    @media (min-width: 768px) {
+        width: 50vw;
+        margin: auto;
+    }
+`;
 export default function About() {
     const { result: aboutPosts, error: aboutPostsError } = sanityQuery(
         getAboutQuery()
@@ -99,7 +104,7 @@ export default function About() {
             <div>
                 <NavBar />
                 {!aboutPosts ? <Loading /> : <></>}
-                {aboutPosts.map((item) => (
+                {aboutPosts.map((item, i) => (
                     <>
                         <ItemContainer key={item._id}>
                             <Image
@@ -119,9 +124,10 @@ export default function About() {
                                 />
                             </TextContainer>
                         </ItemContainer>
-                        <Line />
+                        {aboutPosts.length - 1 != i ? <Line /> : <></>}
                     </>
                 ))}
+                <Line />
                 <Footer />
             </div>
         </Layout>

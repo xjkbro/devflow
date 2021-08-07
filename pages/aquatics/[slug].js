@@ -8,7 +8,14 @@ import ViewCounter from "../../components/ViewCounter";
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import { parseISOString, isoFormatDMY } from "../../utils/Date";
+import styled from "styled-components";
 
+const MainSection = styled.div`
+    @media (min-width: 768px) {
+        width: 50vw;
+        margin: auto;
+    }
+`;
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     const date = parseISOString(article.publishedAt);
@@ -17,24 +24,29 @@ export default function SinglePage({ article }) {
         <Layout>
             <div>
                 <NavBar />
-                <Head>
-                    <title>{article.title} | DevFlow</title>
-                </Head>
-                <img className={styles.image} src={urlFor(article.mainImage)} />
-                <div className={styles.title}>{article.title}</div>
-                <div className={styles.author}>by: {article.name}</div>
-                <div>
-                    {"Published: " + isoFormatDMY(date) + " - "}
-                    <ViewCounter view={true} slug={`${article.slug.current}`} />
-                </div>
-                <div className={styles.body}>
-                    <BlockContent
-                        blocks={article.body}
-                        serializers={serializers}
-                        projectId="d6vys1oo"
-                        dataset="production"
+                <MainSection>
+                    <img
+                        className={styles.image}
+                        src={urlFor(article.mainImage)}
                     />
-                </div>
+                    <div className={styles.title}>{article.title}</div>
+                    <div className={styles.author}>by: {article.name}</div>
+                    <div>
+                        {"Published: " + isoFormatDMY(date) + " - "}
+                        <ViewCounter
+                            view={true}
+                            slug={`${article.slug.current}`}
+                        />
+                    </div>
+                    <div className={styles.body}>
+                        <BlockContent
+                            blocks={article.body}
+                            serializers={serializers}
+                            projectId="d6vys1oo"
+                            dataset="production"
+                        />
+                    </div>
+                </MainSection>
                 <div className={styles.horizontalLine} />
                 <Footer />
             </div>
