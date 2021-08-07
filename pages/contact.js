@@ -1,11 +1,8 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import sanityClient from "../utils/client";
-import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import styles from "../styles/Contact.module.css";
 import styled from "styled-components";
-import Head from "next/head";
 import Layout from "../components/Layout";
 
 const Halves = styled.div`
@@ -29,13 +26,11 @@ const Email = styled.div`
     }
     > h5 {
         font-size: 1.1rem;
-        /* font-weight: 300; */
     }
     > p {
         padding-bottom: 20px;
         font-size: 1.5rem;
         font-weight: 300;
-        /* text-transform: uppercase; */
     }
     :hover {
         filter: grayscale(100%);
@@ -47,13 +42,11 @@ const Email = styled.div`
         }
         > h5 {
             font-size: 0.7rem;
-            /* font-weight: 300; */
         }
         > p {
             padding-bottom: 20px;
             font-size: 1rem;
             font-weight: 300;
-            /* text-transform: uppercase; */
         }
     }
 `;
@@ -75,7 +68,6 @@ const Sponsors = styled.div`
         padding-bottom: 50px;
         font-size: 1.5rem;
         font-weight: 300;
-        /* text-transform: uppercase; */
     }
     :hover {
         filter: grayscale(100%);
@@ -92,7 +84,6 @@ const Sponsors = styled.div`
             padding-bottom: 50px;
             font-size: 0.7rem;
             font-weight: 300;
-            /* text-transform: uppercase; */
         }
     }
 `;
@@ -109,7 +100,6 @@ const Follow = styled.div`
         padding-bottom: 50px;
         font-size: 1.5rem;
         font-weight: 500;
-        /* text-transform: uppercase; */
     }
     :hover {
         filter: grayscale(100%);
@@ -120,7 +110,6 @@ const Follow = styled.div`
             padding-bottom: 30px;
             font-size: 1rem;
             font-weight: 500;
-            /* text-transform: uppercase; */
         }
     }
 `;
@@ -144,7 +133,6 @@ const ListItem = styled.div`
     > a > div > svg:hover {
         transform: scale(1.05);
         opacity: 1;
-        /* box-shadow: 0px 5px 5px #111; */
     }
     @media (max-width: 700px) {
         margin: 0px;

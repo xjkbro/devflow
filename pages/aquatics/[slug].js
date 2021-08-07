@@ -1,9 +1,7 @@
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import Loading from "../../components/Loading";
 import BlockContent from "@sanity/block-content-to-react";
 import { urlFor, sanityClient, serializers } from "../../utils/sanity";
-import { useRouter } from "next/router";
 import Error from "../error";
 import styles from "../../styles/Article.module.css";
 import ViewCounter from "../../components/ViewCounter";

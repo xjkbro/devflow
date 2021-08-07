@@ -1,18 +1,12 @@
-import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import Head from "next/head";
-
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -24,20 +18,9 @@ import OpacityIcon from "@material-ui/icons/Opacity";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
-// import YoutubeSubscribeButton from "deku-youtube-subscribe-button";
 import styles from "../styles/NavBar.module.css";
 
-const useStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: "auto",
-    },
-});
-
 export default function NavBar() {
-    const classes = useStyles();
     const [menu, setMenu] = useState(false);
     const toggleDrawer = (open) => (event) => {
         if (
@@ -158,7 +141,6 @@ export default function NavBar() {
                         <InstagramIcon />
                     </Link>
                     <Link href="https://www.youtube.com/channel/UCWzJk743eDpkpQaVbY2YsPw">
-                        {/* <YoutubeSubscribeButton channel-id="UCWzJk743eDpkpQaVbY2YsPw" /> */}
                         <YouTubeIcon />
                     </Link>
                 </div>

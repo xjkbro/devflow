@@ -1,7 +1,6 @@
-import styles from "../styles/Hero.module.css";
 import Subscribe from "../components/Subscribe";
 import styled from "styled-components";
-// import Image from "next/image";
+
 const Container = styled.div`
     position: relative;
     overflow: hidden;

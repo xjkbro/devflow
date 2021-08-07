@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import Link from "next/link";
-import Image from "next/image";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";

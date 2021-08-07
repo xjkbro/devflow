@@ -1,6 +1,7 @@
 import { createClient, createImageUrlBuilder } from "next-sanity";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
+import imageUrlBuilder from "@sanity/image-url";
 
 const config = {
     /**
@@ -24,14 +25,19 @@ const config = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 // Set up the client for fetching data in the getProps page functions
+
 export const sanityClient = createClient(config);
 const opts = {
     height: "480",
     width: "640",
 };
+
+export const urlFor = (source) => {
+    return imageUrlBuilder(sanityClient).image(source);
+};
+
 export const serializers = {
     types: {
         youtube: ({ node }) => {

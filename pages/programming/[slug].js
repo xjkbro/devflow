@@ -1,28 +1,17 @@
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import Loading from "../../components/Loading";
 import BlockContent from "@sanity/block-content-to-react";
-import { sanityClient, serializers } from "../../utils/sanity";
-import { useRouter } from "next/router";
+import { sanityClient, serializers, urlFor } from "../../utils/sanity";
 import Error from "../error";
 import styles from "../../styles/Article.module.css";
-import imageUrlBuilder from "@sanity/image-url";
 import ViewCounter from "../../components/ViewCounter";
-import Head from "next/head";
 import Layout from "../../components/Layout";
 import { parseISOString, isoFormatDMY } from "../../utils/Date";
-
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source) {
-    return builder.image(source);
-}
 
 export default function SinglePage({ article }) {
     if (!article) return <Error />;
     const date = parseISOString(article.publishedAt);
-
     return (
-        // <Layout article={article}>
         <Layout>
             <div>
                 <NavBar />
@@ -68,7 +57,6 @@ export async function getStaticProps({ params }) {
     }
     `
     );
-    // console.log(post);
     return {
         props: {
             article: post,

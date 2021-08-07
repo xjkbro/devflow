@@ -14,7 +14,6 @@ export default function Layout({ article, children }) {
         return separateWord.join(" ");
     }
     const findPage = () => {
-        console.log(router);
         let capitalize = "";
         if (
             (router.pathname == "/programming/[slug]" ||
@@ -22,21 +21,16 @@ export default function Layout({ article, children }) {
                 router.pathname == "/aquatics/[slug]") &&
             router.query.slug
         ) {
-            // console.log("hello");
             let slug = router.query.slug;
             let num = 0;
             for (let i = 0; i < slug.length - 1; i++) {
                 if (slug[i] == "-") num++;
             }
-            // console.log(num);
             let newSlug = slug;
             for (let i = 0; i < num; i++) {
                 newSlug = newSlug.replace("-", " ");
-                console.log(newSlug);
             }
-            // console.log(newSlug);
             capitalize = capitalizeTheFirstLetterOfEachWord(newSlug) + " | ";
-            // console.log(capitalize);
         }
 
         switch (router.pathname) {
@@ -57,11 +51,9 @@ export default function Layout({ article, children }) {
             case "/programming/[slug]":
             case "/lifting/[slug]":
             case "/aquatics/[slug]":
-                // console.log(capitalize);
                 return capitalize;
             default:
                 return "";
-            // code block
         }
     };
     return (
@@ -72,8 +64,7 @@ export default function Layout({ article, children }) {
                     content="width=device-width, initial-scale=1"
                 />
                 <title>{findPage()}DevFlow</title>
-                {/* <title>DevFlow</title> */}
-                <meta charset="UTF-8" />
+                <meta charSet="UTF-8" />
                 <meta
                     name="description"
                     content="DevFlow is a project that doubles as a brand and a personality. DevFlow is known to provide educational and entertainment value by producing content that involved teaching others programming, showing my journey as a Web Developer, showcasing my love for Aquariums and fishkeeping and share my fitness goals and aspirations."

@@ -2,8 +2,6 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import NavBar from "../components/NavBar";
 import Link from "next/link";
-import sanityClient from "../utils/client";
-import imageUrlBuilder from "@sanity/image-url";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -18,19 +16,13 @@ import {
 import styles from "../styles/Category.module.css";
 import { useRouter } from "next/router";
 import Button from "@material-ui/core/Button";
-import { ArticlePagination } from "../utils/ArticlePagination";
 import ViewCounter from "../components/ViewCounter";
 import sanityQuery, {
     getPostsQuery,
     getTotalPostsQuery,
 } from "../lib/sanityQuery";
 import Layout from "../components/Layout";
-
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source) {
-    return builder.image(source);
-}
-
+import { urlFor } from "../utils/sanity";
 const useStyles = makeStyles({
     card: {
         minWidth: 426,
@@ -53,11 +45,9 @@ export default function Aquatics() {
     const router = useRouter();
     let page = parseInt(router.query.page);
     if (!page) page = 1;
-    console.log(page);
     const { result: totalPosts, error: totalPostsError } = sanityQuery(
         getTotalPostsQuery("Aquatics")
     );
-    console.log(totalPosts);
     const { result: posts, error: postsError } = sanityQuery(
         getPostsQuery("Aquatics", page, maxPosts)
     );

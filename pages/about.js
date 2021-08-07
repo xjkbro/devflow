@@ -1,30 +1,13 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
-import sanityClient from "../utils/client";
-import imageUrlBuilder from "@sanity/image-url";
-import getYouTubeId from "get-youtube-id";
-import YouTube from "react-youtube";
+import Layout from "../components/Layout";
 import BlockContent from "@sanity/block-content-to-react";
 import styles from "../styles/About.module.css";
 import sanityQuery, { getAboutQuery } from "../lib/sanityQuery";
-import styled from "styled-components";
-import Head from "next/head";
-import Layout from "../components/Layout";
+import { serializers, urlFor } from "../utils/sanity";
 
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source) {
-    return builder.image(source);
-}
-const serializers = {
-    types: {
-        youtube: ({ node }) => {
-            const { url } = node;
-            const id = getYouTubeId(url);
-            return <YouTube videoId={id} />;
-        },
-    },
-};
+import styled from "styled-components";
 
 const ItemContainer = styled.div`
     display: flex;
@@ -91,7 +74,6 @@ const Line = styled.div`
 `;
 const Image = styled.img`
     height: 350px;
-    /* border-radius: 50%; */
     margin-right: 50px;
     @media (max-width: 1100px) {
         height: 450px;
@@ -106,7 +88,7 @@ const Image = styled.img`
     }
 `;
 
-export default function Abouts() {
+export default function About() {
     const { result: aboutPosts, error: aboutPostsError } = sanityQuery(
         getAboutQuery()
     );
@@ -145,20 +127,3 @@ export default function Abouts() {
         </Layout>
     );
 }
-// export const getServerSideProps = async ({}) => {
-//     const team = await sanityClient.fetch(
-//         `*[_type == "author"]| order(_createdAt desc){
-//                     name,
-//                     _id,
-//                     slug,
-//                     role,
-//                     image,
-//                     bio,
-//                 }`
-//     );
-//     return {
-//         props: {
-//             team,
-//         },
-//     };
-// };

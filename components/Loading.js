@@ -12,7 +12,6 @@ export default function Loading() {
     );
 }
 const Container = styled.div`
-    /* height: 100%; */
     margin-top: 50px;
     width: 100%;
     margin: auto;

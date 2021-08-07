@@ -1,4 +1,3 @@
-import styles from "../styles/Subscribe.module.css";
 import styled from "styled-components";
 import React, { useRef, useState } from "react";
 
