@@ -27,6 +27,7 @@ export default function Layout({ article, children }) {
                 <meta property="og:site_name" content="devflow" />
                 <meta property="og:type" content="website" />
                 <meta property="og:locale" content="en_US" />
+                <meta name="robots" content="INDEX, FOLLOW" />
                 <meta name="author" content={generateAuthor(article)} />
                 <meta
                     name="viewport"

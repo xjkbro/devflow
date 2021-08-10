@@ -37,7 +37,7 @@ export default function generateTitle() {
 
     switch (router.pathname) {
         case "/":
-            return "DevFlow";
+            return "DevFlow - Swim in a development flow";
         case "/programming":
             return "Programming | DevFlow";
         case "/aquatics":

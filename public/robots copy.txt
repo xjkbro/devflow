@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.thedevflow.com/sitemap.xml

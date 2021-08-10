@@ -179,7 +179,7 @@ export default function Contact() {
                         <ListItem>
                             <SocialIcon
                                 bgColor="#fff"
-                                url="https://facebook.com/thedevflow"
+                                url="https://facebook.com/dev.flow"
                             />
                         </ListItem>
                         <ListItem>
@@ -197,7 +197,7 @@ export default function Contact() {
                         <ListItem>
                             <SocialIcon
                                 bgColor="#fff"
-                                url="https://linkedin.com/jkdelara"
+                                url="https://linkedin.com/in/jkdelara"
                             />
                         </ListItem>
                         <ListItem>
