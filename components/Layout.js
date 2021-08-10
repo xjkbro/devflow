@@ -24,6 +24,10 @@ export default function Layout({ article, children }) {
                     name="keywords"
                     content="devflow, thedevflow, HTML, CSS, JavaScript, ES6, TailwindCSS,Bootstrap,React,ReactJS,Redux,Context API, Next,NextJS,Vercel,Netlify,Firebase,Google Firebase,Sanity,SanityIO,GROQ,Deployment,Angular,Heroku,git,github,nodejs,express,expressjs,npm,yarn,php,C++,c#,mongodb,nosql,sql,mysql,api,business,apps,application,projects,ios,mobile,landing pages,website,DevFlow, aquatics, brand, programming, web developer, fishkeeping, betta, shrimps, aquariums, hardscapping, aquascaping, fitness, gym, lifting, deadlift, squats, bench"
                 />
+                <meta property="og:site_name" content="devflow" />
+                <meta property="og:type" content="website" />
+                <meta property="og:locale" content="en_US" />
+                <meta name="robots" content="INDEX, FOLLOW" />
                 <meta name="author" content={generateAuthor(article)} />
                 <meta
                     name="viewport"
