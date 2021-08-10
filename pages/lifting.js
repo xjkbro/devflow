@@ -61,7 +61,7 @@ export default function Lifting() {
         <Layout>
             <div>
                 <NavBar />
-                <div className={styles.bigTitle}>Lifting</div>
+                <h1 className={styles.bigTitle}>Lifting</h1>
                 <div className={styles.smallTitle}>
                     {page} of {lastPage}
                 </div>

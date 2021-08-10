@@ -60,7 +60,7 @@ export default function Programming() {
         <Layout>
             <div>
                 <NavBar />
-                <div className={styles.bigTitle}>Programming</div>
+                <h1 className={styles.bigTitle}>Programming</h1>
                 <div className={styles.smallTitle}>
                     {page} of {lastPage}
                 </div>
