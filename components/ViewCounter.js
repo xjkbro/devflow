@@ -3,7 +3,6 @@ import useSWR from "swr";
 
 async function fetcher(...args) {
     const res = await fetch(...args);
-
     return res.json();
 }
 
@@ -19,5 +18,5 @@ export default function ViewCounter({ slug, view }) {
         if (view) registerView();
     }, [slug]);
 
-    return `${views > 0 ? views.toLocaleString() : "–––"} views`;
+    return `${views > 0 ? views.toLocaleString() : "––"} views`;
 }

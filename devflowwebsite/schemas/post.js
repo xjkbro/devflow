@@ -24,6 +24,11 @@ export default {
             to: { type: "author" },
         },
         {
+            name: "summary",
+            title: "Post Summary",
+            type: "string",
+        },
+        {
             name: "mainImage",
             title: "Main image",
             type: "image",
