@@ -19,7 +19,7 @@ export default function SinglePage({ article }) {
     if (!article) return <Error />;
     const date = parseISOString(article.publishedAt);
     return (
-        <Layout>
+        <Layout article={article}>
             <div>
                 <NavBar />
                 <MainSection>
@@ -59,6 +59,7 @@ export async function getStaticProps({ params }) {
         title,
         _id,
         slug,
+        summary,
         category->{title,_id,description},
         mainImage{
             asset->{

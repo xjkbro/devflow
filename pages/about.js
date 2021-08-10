@@ -6,6 +6,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import styles from "../styles/About.module.css";
 import sanityQuery, { getAboutQuery } from "../lib/sanityQuery";
 import { serializers, urlFor } from "../utils/sanity";
+import React from "react";
 
 import styled from "styled-components";
 
@@ -105,7 +106,7 @@ export default function About() {
                 <NavBar />
                 {!aboutPosts ? <Loading /> : <></>}
                 {aboutPosts.map((item, i) => (
-                    <>
+                    <React.Fragment key={item._id}>
                         <ItemContainer key={item._id}>
                             <Image
                                 className={styles.image}
@@ -125,7 +126,7 @@ export default function About() {
                             </TextContainer>
                         </ItemContainer>
                         {aboutPosts.length - 1 != i ? <Line /> : <></>}
-                    </>
+                    </React.Fragment>
                 ))}
                 <Line />
                 <Footer />

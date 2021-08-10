@@ -1,61 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import generateTitle from "../utils/seo/title";
+import generateDescription from "../utils/seo/description";
+import generateAuthor from "../utils/seo/author";
 
 export default function Layout({ article, children }) {
     const router = useRouter();
 
-    function capitalizeTheFirstLetterOfEachWord(words) {
-        var separateWord = words.toLowerCase().split(" ");
-        for (var i = 0; i < separateWord.length; i++) {
-            separateWord[i] =
-                separateWord[i].charAt(0).toUpperCase() +
-                separateWord[i].substring(1);
-        }
-        return separateWord.join(" ");
-    }
-    const findPage = () => {
-        let capitalize = "";
-        if (
-            (router.pathname == "/programming/[slug]" ||
-                router.pathname == "/lifting/[slug]" ||
-                router.pathname == "/aquatics/[slug]") &&
-            router.query.slug
-        ) {
-            let slug = router.query.slug;
-            let num = 0;
-            for (let i = 0; i < slug.length - 1; i++) {
-                if (slug[i] == "-") num++;
-            }
-            let newSlug = slug;
-            for (let i = 0; i < num; i++) {
-                newSlug = newSlug.replace("-", " ");
-            }
-            capitalize = capitalizeTheFirstLetterOfEachWord(newSlug) + " | ";
-        }
-
-        switch (router.pathname) {
-            case "/":
-                return "";
-            case "/programming":
-                return "Programming | ";
-            case "/aquatics":
-                return "Aquatics | ";
-            case "/lifting":
-                return "Lifting | ";
-            case "/contact":
-                return "Contact | ";
-            case "/about":
-                return "About | ";
-            case "/error":
-                return "Error | ";
-            case "/programming/[slug]":
-            case "/lifting/[slug]":
-            case "/aquatics/[slug]":
-                return capitalize;
-            default:
-                return "";
-        }
-    };
     return (
         <>
             <Head>
@@ -63,17 +14,17 @@ export default function Layout({ article, children }) {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <title>{findPage()}DevFlow</title>
+                <title>{generateTitle()}</title>
                 <meta charSet="UTF-8" />
                 <meta
                     name="description"
-                    content="DevFlow is a project that doubles as a brand and a personality. DevFlow is known to provide educational and entertainment value by producing content that involved teaching others programming, showing my journey as a Web Developer, showcasing my love for Aquariums and fishkeeping and share my fitness goals and aspirations."
+                    content={generateDescription(article)}
                 />
                 <meta
                     name="keywords"
-                    content="devflow,thedevflow,HTML,CSS,JavaScript,ES6,TailwindCSS,Bootstrap,React,ReactJS,Redux,Context API, Next,NextJS,Vercel,Netlify,Firebase,Google Firebase,Sanity,SanityIO,GROQ,Deployment,Angular,Heroku,git,github,nodejs,express,expressjs,npm,yarn,php,C++,c#,mongodb,nosql,sql,mysql,api,business,apps,application,projects,ios,mobile,landing pages,website,DevFlow, aquatics, brand, programming, web developer, fishkeeping, betta, shrimps, aquariums, hardscapping, aquascaping, fitness, gym, lifting, deadlift, squats, bench"
+                    content="devflow, thedevflow, HTML, CSS, JavaScript, ES6, TailwindCSS,Bootstrap,React,ReactJS,Redux,Context API, Next,NextJS,Vercel,Netlify,Firebase,Google Firebase,Sanity,SanityIO,GROQ,Deployment,Angular,Heroku,git,github,nodejs,express,expressjs,npm,yarn,php,C++,c#,mongodb,nosql,sql,mysql,api,business,apps,application,projects,ios,mobile,landing pages,website,DevFlow, aquatics, brand, programming, web developer, fishkeeping, betta, shrimps, aquariums, hardscapping, aquascaping, fitness, gym, lifting, deadlift, squats, bench"
                 />
-                <meta name="author" content="Jason-Kyle De Lara" />
+                <meta name="author" content={generateAuthor(article)} />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
@@ -105,7 +56,7 @@ export default function Layout({ article, children }) {
                     sizes="16x16"
                     href="favicon/favicon-16x16.png"
                 />
-                <link rel="manifest" href="/site.webmanifest"></link>
+                <link rel="manifest" href="/favicon/site.webmanifest"></link>
             </Head>
             <main>{children}</main>
         </>
