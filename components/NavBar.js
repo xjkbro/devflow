@@ -42,6 +42,7 @@ export default function NavBar() {
                     <ListItem button key={"Home"}>
                         <Image
                             src="/images/DevFlow Logo - White.png"
+                            alt="DevFlow Logo"
                             height={174}
                             width={348}
                             style={{ display: "block" }}

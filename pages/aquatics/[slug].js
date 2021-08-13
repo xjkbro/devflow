@@ -28,6 +28,7 @@ export default function SinglePage({ article }) {
                     <img
                         className={styles.image}
                         src={urlFor(article.mainImage)}
+                        alt="Article Feature Image"
                     />
                     <div className={styles.title}>{article.title}</div>
                     <div className={styles.author}>by: {article.name}</div>

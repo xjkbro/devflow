@@ -111,8 +111,8 @@ export default function About() {
                             <Image
                                 className={styles.image}
                                 src={urlFor(item.image)}
+                                alt="About Page Image"
                             />
-
                             <TextContainer>
                                 <h1>{item.name}</h1>
                                 <h3>{item.role}</h3>

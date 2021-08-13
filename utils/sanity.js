@@ -59,5 +59,8 @@ export const serializers = {
                 </pre>
             );
         },
+        image: ({ node }) => {
+            return <img src={urlFor(node)} alt="Article Images" />;
+        },
     },
 };
