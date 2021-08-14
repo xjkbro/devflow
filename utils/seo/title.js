@@ -55,6 +55,6 @@ export default function generateTitle() {
         case "/aquatics/[slug]":
             return phrase;
         default:
-            return "DevFlow";
+            return "DevFlow - Swim in a development flow";
     }
 }
