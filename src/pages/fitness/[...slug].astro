@@ -1,0 +1,52 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { fetchCategoryDetails } from '../../lib/api';
+import BlogPost from '../../layouts/BlogPost.astro';
+import { marked } from 'marked';
+
+interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  feature_image_url?: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  excerpt?: string;
+  views_count?: number;
+  // Add other fields as necessary based on your CMS response
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  try {
+    // Fetch fitness posts (category 4)
+    const data = await fetchCategoryDetails(4);
+
+    return data?.posts.map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+  } catch (error) {
+    console.error('Error generating fitness post paths:', error);
+    return [];
+  }
+};
+
+interface Props {
+  post: Post;
+}
+
+const { post }: Props = Astro.props;
+
+// Process markdown content
+const processedContent = await marked(post.content || "");
+---
+
+<BlogPost 
+  title={post.title}
+  description={post.excerpt || post.title}
+  pubDate={new Date(post.created_at)}
+  updatedDate={post.updated_at ? new Date(post.updated_at) : undefined}
+>
+  <div set:html={processedContent} />
+</BlogPost>
