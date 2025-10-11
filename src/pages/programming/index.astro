@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostsList from "../../components/PostsList.tsx";
+import { CATEGORY_ID } from "./constants";
+
+const response = await fetch(`${import.meta.env.CMS_API_URL}/api/categories/${CATEGORY_ID}`, {
+  headers: {
+    'Authorization': `Bearer ${import.meta.env.CMS_API_KEY}`
+  }
+});
+
+if (!response.ok) {
+  throw new Error(`Failed to fetch posts: ${response.status}`);
+}
+
+const data = await response.json();
+const posts = data.data.posts || data; // Adjust based on API response structure
+const description = data.data.description || `All posts in the ${data.data.name} category.`;
+---
+
+<Layout>
+  <div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8">Programming</h1>
+	<p class="mb-6 text-gray-300">{description}</p>
+    <PostsList posts={posts} category="programming" client:load />
+  </div>
+</Layout>

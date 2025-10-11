@@ -1,0 +1,94 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { CATEGORY_ID } from "./constants";
+import type { Post } from "../../types";
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.CMS_API_URL}/api/categories/${CATEGORY_ID}`, {
+    headers: {
+      'Authorization': `Bearer ${import.meta.env.CMS_API_KEY}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const posts = data.data.posts || data;
+
+  return posts.map((post: Post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post }: { post: Post } = Astro.props;
+
+// Function to convert text content to HTML
+function formatContent(content: string) {
+  if (!content) return '';
+  
+  return content
+    // Convert \n\n to paragraph breaks
+    .split('\n\n')
+    .map(paragraph => {
+      if (!paragraph.trim()) return '';
+      
+      // Handle markdown headers (lines with ---- underneath)
+      const lines = paragraph.split('\n');
+      if (lines.length === 2 && lines[1].match(/^-+$/)) {
+        return `<h2 class="text-2xl font-bold mt-8 mb-4">${lines[0]}</h2>`;
+      }
+      
+      // Handle regular paragraphs
+      return `<p class="mb-4 leading-relaxed">${paragraph.replace(/\n/g, '<br>')}</p>`;
+    })
+    .join('');
+}
+
+const formattedContent = formatContent(post.content);
+---
+
+<Layout>
+  <div class="container mx-auto px-6 py-12">
+    <article class="rounded-lg shadow-lg text-white overflow-hidden">
+      <!-- Featured Image -->
+      {post.feature_image_url && (
+        <div class="w-full min-h-full overflow-hidden">
+          <img 
+            src={post.feature_image_url} 
+            alt={post.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      
+      <div class="p-8">
+        <!-- Title -->
+        <h1 class="text-4xl font-bold mb-4 text-gray-200">{post.title}</h1>
+        
+        <!-- Meta Info -->
+        <div class="flex items-center gap-4 mb-6 text-gray-100">
+          <span>{new Date(post.created_at).toLocaleDateString()}</span>
+		  <span>|</span>
+          {post.views_count >= 0 && (
+            <span>{post.views_count} views</span>
+          )}
+        </div>
+        
+        <!-- Excerpt -->
+        {post.excerpt && (
+          <div class="bg-neutral-800 border-l-4 border-blue-500 p-4 mb-8">
+            <p class="text-lg text-neutral-100 italic">{post.excerpt}</p>
+          </div>
+        )}
+        
+        <!-- Content -->
+        {post.content && (
+          <div class="prose prose-lg max-w-none text-white" set:html={formattedContent}></div>
+        )}
+      </div>
+    </article>
+  </div>
+</Layout>

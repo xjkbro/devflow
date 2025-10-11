@@ -1,63 +1,42 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import Layout from "../layouts/Layout.astro"
+const sections = [
+	{
+		name: "Devflow",
+		image: "/images/DevFlow Logo - White.png",
+		subtitle: "Company",
+		content: `
+The idea of DevFlow first started out when I took a web development bootcamp when I already had decent experience in web development. One day when I was in a lecture, I saw some of the students were struggling a little so I let them know they could message me on Slack and I could assist them where they need help. It was interesting explaining my notes and teaching them and also really refreshing compared to the constant learning I was doing. So I thought maybe I should try making YouTube channel and provide Crash Courses and other educational material.
+
+DevFlow has now transformed into project that doubles as a brand and a personality. DevFlow is now known to provide educational and entertainment value by producing content that involved teaching others programming, showing my journey as a Web Developer, showcasing my love for Aquariums and fishkeeping and share my fitness goals and aspirations.
+`,
+	},
+	{
+		name: "Jason-Kyle De Lara",
+		image: "/images/Jason De Lara Headshot.png",
+		subtitle: "Founder and Chief Executive Officer",
+		content: `
+Hello! My name is Jason! I'm a creative, outgoing, goal oriented individual who is always looking for ways to improve. My programming journey started back in middle school where I learned HTML from an elective course and was exposed to CSS due to a social media platform called GaiaOnline. On that platform, users were abled to customize their profiles by using CSS. I later took a halt in learning web development to learn a different beast in high school, Java. In high school, I had the opportunity to learn Java from my Computer Science I and AP courses. But with the knowledge, I found myself uninterested in subject because my initial thought about it as a career was "I don't want to have an office job where I would sit down all day." So I took on a different beast, Computer Engineering when I entered college. Many challenges and sacrifices needed to be made and I had to find a new major. I fortunately found many reasons to come back to Computer Science, one of which was video game development and because of it I began tackling algorithms, theories and concepts. My studies in Web Development picked back up when I lost interest in wanting to develop video games and learning software development. I found more joy creating websites and seeing everything visually come together in web development. From there, I graduated College and took on a bootcamp where I learned more concepts and technologies in web development that helped provided the skills I need to deploy real world applications and start many big projects with front end technologies, backend technologies and deployment. Besides programming, I enjoy going to the gym and being active by playing basketball, volleyball or hiking. I also enjoy taking care of aquatic life and aqua scaping.
+`,
+	},
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
-
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
-
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
-
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
-
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
+<Layout>
+	<div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+		<div class="container mx-auto px-6 py-12">
+			<h1 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+				About DevFlow
+			</h1>
+			<div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+				{sections.map((section) => (
+					<div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-white/20 hover:border-white/40 transition-all duration-300">
+						<h2 class="text-3xl font-semibold mb-2 text-cyan-300">{section.name}</h2>
+						<h3 class="text-xl font-light mb-6 text-gray-300">{section.subtitle}</h3>
+						<p class="text-lg leading-relaxed text-gray-100 whitespace-pre-line">{section.content}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
 </Layout>
