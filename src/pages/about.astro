@@ -13,7 +13,7 @@ DevFlow has now transformed into project that doubles as a brand and a personali
 	},
 	{
 		name: "Jason-Kyle De Lara",
-		image: "/images/Jason De Lara Headshot.png",
+		image: "",
 		subtitle: "Founder and Chief Executive Officer",
 		content: `
 Hello! My name is Jason! I'm a creative, outgoing, goal oriented individual who is always looking for ways to improve. My programming journey started back in middle school where I learned HTML from an elective course and was exposed to CSS due to a social media platform called GaiaOnline. On that platform, users were abled to customize their profiles by using CSS. I later took a halt in learning web development to learn a different beast in high school, Java. In high school, I had the opportunity to learn Java from my Computer Science I and AP courses. But with the knowledge, I found myself uninterested in subject because my initial thought about it as a career was "I don't want to have an office job where I would sit down all day." So I took on a different beast, Computer Engineering when I entered college. Many challenges and sacrifices needed to be made and I had to find a new major. I fortunately found many reasons to come back to Computer Science, one of which was video game development and because of it I began tackling algorithms, theories and concepts. My studies in Web Development picked back up when I lost interest in wanting to develop video games and learning software development. I found more joy creating websites and seeing everything visually come together in web development. From there, I graduated College and took on a bootcamp where I learned more concepts and technologies in web development that helped provided the skills I need to deploy real world applications and start many big projects with front end technologies, backend technologies and deployment. Besides programming, I enjoy going to the gym and being active by playing basketball, volleyball or hiking. I also enjoy taking care of aquatic life and aqua scaping.
@@ -23,17 +23,32 @@ Hello! My name is Jason! I'm a creative, outgoing, goal oriented individual who 
 ---
 
 <Layout>
-	<div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+	<div class="mt-8 min-h-screen  text-white">
 		<div class="container mx-auto px-6 py-12">
-			<h1 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
+			<!-- <h1 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
 				About DevFlow
-			</h1>
-			<div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-				{sections.map((section) => (
-					<div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-white/20 hover:border-white/40 transition-all duration-300">
-						<h2 class="text-3xl font-semibold mb-2 text-cyan-300">{section.name}</h2>
-						<h3 class="text-xl font-light mb-6 text-gray-300">{section.subtitle}</h3>
-						<p class="text-lg leading-relaxed text-gray-100 whitespace-pre-line">{section.content}</p>
+			</h1> -->
+			<div class="flex flex-col gap-12">
+				{sections.map((section, index) => (
+					<div class="bg-neutral-700/10 backdrop-blur-sm rounded-xl p-8 shadow-2xl transition-all duration-300">
+						<div class={`flex flex-col lg:flex-row gap-8 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+							{section.image && <div class="flex-shrink-0 lg:w-1/3">
+								<div class="relative group">
+									<img 
+										src={section.image} 
+										alt={section.name} 
+										class="w-full h-64 aspect aspect-square object-contain rounded-lg shadow-lg group-hover:scale-[101%] transition-transform duration-300"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-lg"></div>
+								</div>
+							</div>}
+							
+							<div class="flex-1 lg:w-2/3 my-12">
+								<h2 class="text-5xl font-semibold mb-2 text-white">{section.name}</h2>
+								<h3 class="text-xl font-light mb-6 text-gray-400">{section.subtitle}</h3>
+								<p class="text-lg leading-relaxed text-gray-100 whitespace-pre-line">{section.content}</p>
+							</div>
+						</div>
 					</div>
 				))}
 			</div>

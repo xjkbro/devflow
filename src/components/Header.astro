@@ -21,8 +21,8 @@ const socialLinks = [
 ---
 <header class="flex items-center justify-between py-4">
 	<div class="flex items-center gap-16">
-		<img src="/images/DevFlow Logo - White.png" alt="DevFlow Logo" class="h-48">
-		<nav class="">
+		<img src="/images/DevFlow Logo - White.png" alt="DevFlow Logo" class="h-[150px] w-96 object-cover">
+		<nav class="hidden md:block">
 			<ul class="flex space-x-6 text-lg">
 				{navLinks.map(({ name, href }) => (
 					<li><a href={href} class="relative hover:after:block after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-0.5 after:bg-white after:transition-all after:duration-300 hover:after:w-full">{name}</a></li>
@@ -30,11 +30,142 @@ const socialLinks = [
 			</ul>
 		</nav>
 	</div>
-	<div class="flex items-center gap-4">
+	<div class="hidden md:flex items-center gap-4">
 		{socialLinks.map(({ name, href, icon: Icon }) => (
 			<a href={href} target="_blank" rel="noopener noreferrer" aria-label={name} class="hover:text-gray-400">
 				<Icon class="w-6 h-6" />
 			</a>
 		))}
 	</div>
+	<!-- Mobile Nav -->
+	<div class="md:hidden">
+		<!-- Mobile menu button -->
+		<button id="mobile-menu-button" class="focus:outline-none p-2 transition-transform duration-200 hover:scale-110" aria-label="Toggle Menu">
+			<div class="w-8 h-6 flex flex-col justify-between">
+				<span class="hamburger-line w-full h-0.5 bg-white rounded"></span>
+				<span class="hamburger-line w-full h-0.5 bg-white rounded"></span>
+				<span class="hamburger-line w-full h-0.5 bg-white rounded"></span>
+			</div>
+		</button>
+	</div>
+	<!-- Mobile Menu (hidden by default) -->
+	<div id="mobile-menu" class="mobile-menu-hidden z-50 absolute top-4 pb-12 shadow-2xl left-0 w-full bg-[#061922] border-t border-gray-700 transition-all duration-300 ease-in-out transform">
+		<div class="flex items-center justify-between p-4">
+			<img src="/images/DevFlow Logo - White.png" alt="DevFlow Logo" class="h-[100px] w-64 object-cover">
+			<button id="mobile-menu-close" class="focus:outline-none transition-transform duration-200 hover:scale-110" aria-label="Close Menu">
+				<svg class="w-12 h-12 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+			</button>
+		</div>
+		<hr class="border-gray-700" />
+		<ul class="flex flex-col p-4 space-y-4">
+			{navLinks.map(({ name, href }, index) => (
+				<li class="mobile-menu-item opacity-0 transform translate-y-2 transition-all duration-300 ease-out" style={`transition-delay: ${index * 50}ms`}>
+					<a href={href} class="block text-lg hover:text-gray-400 transition-colors duration-200">{name}</a>
+				</li>
+			))}
+			<li class="mobile-menu-item opacity-0 transform translate-y-2 transition-all duration-300 ease-out flex space-x-4 mt-4" style={`transition-delay: ${navLinks.length * 50}ms`}>
+				{socialLinks.map(({ name, href, icon: Icon }) => (
+					<a href={href} target="_blank" rel="noopener noreferrer" aria-label={name} class="hover:text-gray-400 transition-all duration-200 hover:scale-110">
+						<Icon class="w-6 h-6" />
+					</a>
+				))}
+			</li>
+		</ul>
+	</div>
 </header>
+
+<style>
+	.mobile-menu-hidden {
+		opacity: 0;
+		transform: translateY(-10px);
+		pointer-events: none;
+	}
+	
+	.mobile-menu-visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+	
+	.mobile-menu-visible .mobile-menu-item {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	
+	.hamburger-line {
+		transition: all 0.3s ease-in-out;
+		transform-origin: center;
+	}
+	
+	.hamburger-open .hamburger-line:nth-child(1) {
+		transform: rotate(45deg) translate(6px, 6px);
+	}
+	
+	.hamburger-open .hamburger-line:nth-child(2) {
+		opacity: 0;
+	}
+	
+	.hamburger-open .hamburger-line:nth-child(3) {
+		transform: rotate(-45deg) translate(6px, -6px);
+	}
+</style>
+
+<script>
+	function initMobileMenu() {
+		const menuButton = document.getElementById('mobile-menu-button');
+		const menuClose = document.getElementById('mobile-menu-close');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const menuItems = document.querySelectorAll('.mobile-menu-item');
+		
+		function openMenu() {
+			mobileMenu?.classList.remove('mobile-menu-hidden');
+			mobileMenu?.classList.add('mobile-menu-visible');
+			menuButton?.classList.add('hamburger-open');
+		}
+		
+		function closeMenu() {
+			mobileMenu?.classList.remove('mobile-menu-visible');
+			mobileMenu?.classList.add('mobile-menu-hidden');
+			menuButton?.classList.remove('hamburger-open');
+		}
+		
+		menuButton?.addEventListener('click', () => {
+			if (mobileMenu?.classList.contains('mobile-menu-visible')) {
+				closeMenu();
+			} else {
+				openMenu();
+			}
+		});
+		
+		menuClose?.addEventListener('click', closeMenu);
+		
+		// Close menu when clicking on a link
+		menuItems.forEach(item => {
+			const link = item.querySelector('a');
+			if (link && !link.target) { // Only close for internal links
+				link.addEventListener('click', closeMenu);
+			}
+		});
+		
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			if (!mobileMenu?.contains(e.target as Node) && !menuButton?.contains(e.target as Node)) {
+				closeMenu();
+			}
+		});
+		
+		// Close menu on escape key
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				closeMenu();
+			}
+		});
+	}
+	
+	// Initialize when DOM is loaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initMobileMenu);
+	} else {
+		initMobileMenu();
+	}
+</script>

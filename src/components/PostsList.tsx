@@ -15,7 +15,7 @@ export default function PostsList({ posts, category }: { posts: Post[], category
         {currentPosts.map((post) => (
           <article key={post.id} className="relative group cursor-pointer">
             <a href={`/${category}/${post.slug}`} className="block">
-			<div className="aspect-square w-full rounded-lg overflow-hidden relative bg-gradient-to-br from-gray-800 via-blue-900 to-purple-900 hover:shadow-lg transition-shadow duration-300">
+			<div className="aspect-video w-full rounded-lg overflow-hidden relative bg-gradient-to-br from-gray-800 via-blue-900 to-purple-900 hover:shadow-lg transition-shadow duration-300">
 				{post.feature_image_url && (
 				<img 
 					src={post.feature_image_url} 
